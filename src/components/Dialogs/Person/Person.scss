@@ -1,0 +1,28 @@
+@import "src/style/colors.scss";
+
+.people-dialog {
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    border-radius: 30px;
+    background-color: rgba(255, 228, 196, 0);
+    transition: all 0.2s ease;
+    &__icon {
+        justify-self: start;
+
+        background-color: rgb(240, 188, 140);
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+    }
+
+    &__name {
+        color: $black;
+        font-weight: 700;
+    }
+
+    &:hover {
+        background-color: bisque;
+    }
+}

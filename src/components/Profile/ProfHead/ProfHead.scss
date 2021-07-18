@@ -1,0 +1,29 @@
+.prof-head {
+    &__body {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+    }
+
+    &__image {
+        justify-self: center;
+
+        overflow: hidden;
+        height: 300px;
+        width: 300px;
+        border-radius: 50%;
+
+        & img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__name {
+        font-family: "Nunito", sans-serif;
+        font-size: 60px;
+        font-weight: 800;
+    }
+}

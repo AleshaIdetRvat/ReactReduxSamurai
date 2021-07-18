@@ -1,0 +1,10 @@
+.post {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(202, 202, 202);
+    overflow: hidden;
+    & img {
+        height: 60px;
+        padding: 10px;
+    }
+}

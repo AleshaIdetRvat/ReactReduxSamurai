@@ -1,0 +1,28 @@
+.sidebar {
+    grid-area: sidebar;
+    &__body {
+        height: 100%;
+        padding: 15px;
+        background-color: rgba(189, 205, 235, 0.815);
+    }
+
+    &__grid {
+        display: grid;
+        gap: 40px;
+    }
+
+    &__item {
+        box-sizing: content-box;
+
+        & a {
+            color: rgb(41, 41, 41);
+            font-weight: 700;
+            transition: all 0.1s ease;
+            border-bottom: 0px solid rgb(240, 188, 140);
+
+            &:hover {
+                color: rgb(240, 188, 140);
+            }
+        }
+    }
+}

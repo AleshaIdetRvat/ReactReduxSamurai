@@ -1,0 +1,24 @@
+.header {
+    grid-area: header;
+
+    background-color: rgb(85, 85, 85);
+    &__body {
+        height: 100%;
+    }
+
+    &__grid {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 85px 1fr;
+
+        align-items: center;
+    }
+
+    &__logo {
+        background-color: white;
+        margin: 15px;
+        border-radius: 50%;
+
+        height: 65%;
+    }
+}

@@ -1,0 +1,21 @@
+.message {
+    max-width: 70%;
+    justify-self: start;
+    &__body {
+        padding: 8px;
+
+        background-color: rgba(189, 205, 235, 0.61);
+        border-radius: 12px 12px 12px 5px;
+    }
+
+    &__text {
+    }
+}
+
+.my-message {
+    justify-self: end;
+    .message__body {
+        background-color: rgb(250, 213, 179);
+        border-radius: 12px 12px 5px 12px;
+    }
+}
