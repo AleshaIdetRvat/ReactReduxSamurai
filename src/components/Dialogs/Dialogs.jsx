@@ -12,12 +12,20 @@ const Dialogs = (props) => {
     let newMessageRef = React.createRef();
 
     const clickSend = () => {
-        props.addMessage();
-        props.updateNewMessageText("");
+        props.dispatch({
+            type: "ADD-MESSAGE"
+        });
+        props.dispatch({
+            type: "UPDATE-NEW-MESSAGE",
+            newText: ""
+        });
     }
     const changeInput = () => {
         let innerInputNew = newMessageRef.current.value;
-        props.updateNewMessageText(innerInputNew);
+        props.dispatch({
+            type: "UPDATE-NEW-MESSAGE",
+            newText: innerInputNew
+        });
 
     }
 

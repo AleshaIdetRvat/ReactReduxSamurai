@@ -9,13 +9,21 @@ const MyPosts = (props) => {
     const textareaRef = React.createRef();
 
     const clickAddPost = () => {
-        props.addPost();
-        props.updateNewPostText('')
+        props.dispatch({
+            type: "ADD-POST"
+        });
+        props.dispatch({
+            type: "UPDATE-NEW-POST",
+            newText: ""
+        });
     }
 
     const changeTextarea = () => {
         let innerTextarea = textareaRef.current.value;
-        props.updateNewPostText(innerTextarea);
+        props.dispatch({
+            type: "UPDATE-NEW-POST",
+            newText: innerTextarea
+        });
 
     }
 

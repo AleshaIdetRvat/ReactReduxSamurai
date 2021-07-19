@@ -10,9 +10,9 @@ const Profile = (props) => {
             <div class="profile__grid">
                 <ProfHead Name="Alexey Alexeevskiy" profAva={mainImage} />
                 <MyPosts
-                    updateNewPostText={props.updateNewPostText}
                     profileData={props.profileData}
-                    addPost={props.addPost} />
+                    dispatch={props.dispatch} />
+
             </div>
 
 

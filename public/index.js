@@ -10,10 +10,7 @@ import App from '../src/components/App';
 const rerenderTree = (state) => {
     render(
         <App appState={state}
-            addMessage={store.addMessage.bind(store)}
-            addPost={store.addPost.bind(store)}
-            updateNewPostText={store.updateNewPostText.bind(store)}
-            updateNewMessageText={store.updateNewMessageText.bind(store)}
+            dispatch={store.dispatch.bind(store)}
         />,
         document.getElementById("root")
     )
