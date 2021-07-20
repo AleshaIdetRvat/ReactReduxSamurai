@@ -1,6 +1,8 @@
 import React from 'react'
 import './MyPosts.scss'
 import Post from './Post/Post'
+import { addPostActionCreator, updateNewPostActionCreator } from '../../../redux/state'
+
 
 const MyPosts = (props) => {
 
@@ -9,21 +11,13 @@ const MyPosts = (props) => {
     const textareaRef = React.createRef();
 
     const clickAddPost = () => {
-        props.dispatch({
-            type: "ADD-POST"
-        });
-        props.dispatch({
-            type: "UPDATE-NEW-POST",
-            newText: ""
-        });
+        props.dispatch(addPostActionCreator());
+        props.dispatch(updateNewPostActionCreator());
     }
 
     const changeTextarea = () => {
         let innerTextarea = textareaRef.current.value;
-        props.dispatch({
-            type: "UPDATE-NEW-POST",
-            newText: innerTextarea
-        });
+        props.dispatch(updateNewPostActionCreator(innerTextarea));
 
     }
 

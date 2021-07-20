@@ -2,6 +2,9 @@ import React from 'react'
 import Person from './Person/Person'
 import './Dialogs.scss'
 import Message from './Message/Message'
+import { addMsgActionCreator, updateNewMsgActionCreator } from '../../redux/state'
+
+
 
 const Dialogs = (props) => {
 
@@ -12,20 +15,12 @@ const Dialogs = (props) => {
     let newMessageRef = React.createRef();
 
     const clickSend = () => {
-        props.dispatch({
-            type: "ADD-MESSAGE"
-        });
-        props.dispatch({
-            type: "UPDATE-NEW-MESSAGE",
-            newText: ""
-        });
+        props.dispatch(addMsgActionCreator());
+        props.dispatch(updateNewMsgActionCreator());
     }
     const changeInput = () => {
         let innerInputNew = newMessageRef.current.value;
-        props.dispatch({
-            type: "UPDATE-NEW-MESSAGE",
-            newText: innerInputNew
-        });
+        props.dispatch(updateNewMsgActionCreator(innerInputNew));
 
     }
 

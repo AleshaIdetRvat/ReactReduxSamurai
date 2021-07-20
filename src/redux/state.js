@@ -1,6 +1,9 @@
-//import rerenderTree from "../render"
 
-//tempText = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste necessitatibus saepe, odit ipsam blanditiis corporis natus, rem quasi numquam cupiditate voluptas quae nihil dolorem iure. Tempore voluptate atque accusantium est!Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste necessitatibus saepe, odit ipsam blanditiis corporis natus, rem quasi numquam cupiditate voluptas quae nihil dolorem iure. Tempore voluptate atque accusantium est!";
+const ADD_POST = "ADD-POST"
+const UPDATE_NEW_POST = "UPDATE-NEW-POST"
+const ADD_MESSAGE = "ADD-MESSAGE"
+const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE"
+
 export let store = {
 
 
@@ -109,4 +112,20 @@ export let store = {
     },
 }
 
+export const addPostActionCreator = () => ({
+    type: ADD_POST
+})
+
+
+export const updateNewPostActionCreator = (text = "") => ({
+    type: UPDATE_NEW_POST,
+    newText: text
+})
+
+export const addMsgActionCreator = () => ({ type: ADD_MESSAGE })
+
+export const updateNewMsgActionCreator = (text = "") => ({
+    type: UPDATE_NEW_MESSAGE,
+    newText: text
+})
 
