@@ -2,7 +2,7 @@ import React from 'react'
 import Person from './Person/Person'
 import './Dialogs.scss'
 import Message from './Message/Message'
-import { addMsgActionCreator, updateNewMsgActionCreator } from '../../redux/state'
+import { addMsgActionCreator, updateNewMsgActionCreator } from '../../redux/dialogs_reducer'
 
 
 
@@ -21,7 +21,6 @@ const Dialogs = (props) => {
     const changeInput = () => {
         let innerInputNew = newMessageRef.current.value;
         props.dispatch(updateNewMsgActionCreator(innerInputNew));
-
     }
 
     return (

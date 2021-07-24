@@ -1,3 +1,7 @@
+import dialogsReducer from "./dialogs_reducer"
+import profileReducer from "./profile_reducer"
+import sidebarReducer from "./sidebar_reducer"
+
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST = "UPDATE-NEW-POST"
@@ -5,7 +9,6 @@ const ADD_MESSAGE = "ADD-MESSAGE"
 const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE"
 
 export let store = {
-
 
     _state: {
 
@@ -39,93 +42,37 @@ export let store = {
                 { id: 6, likes_count: "12", message: "Good day!!!" },
             ],
             innerTextarea: "",
+        },
+
+        Sidebar: {
+
         }
 
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case "ADD-POST":
-                this.addPost();
-                break;
-            case "ADD-MESSAGE":
-                this.addMessage();
-                break;
-            case "UPDATE-NEW-POST":
-                this.updateNewPostText(action.newText);
-                break;
-            case "UPDATE-NEW-MESSAGE":
-                this.updateNewMessageText(action.newText);
-                break;
-
-            default:
-                break;
+        //////////First option
+        const updatedState = {
+            Messages: dialogsReducer(this._state.Messages, action),
+            Profile: profileReducer(this._state.Profile, action),
+            Sidebar: sidebarReducer(this._state.Sidebar, action),
         }
+        this._callSubscriber(updatedState)
+
+        //////////Second option
+        //this._state.Messages = dialogsReducer(this._state.Messages, action)
+        //this._state.Profile = profileReducer(this._state.Profile, action)
+        //this._state.Sidebar = sidebarReducer(this._state.Sidebar, action)
+        //this._callSubscriber(this._state)
     },
 
     getState() {
         return this._state;
     },
 
-    _callBackRerender() { },
-
-    addPost() {
-        const newPost = {
-            likes_count: '0',
-            message: this._state.Profile.innerTextarea,
-            id: 7
-        }
-
-        this._state.Profile.postsData.push(newPost)
-        this._callBackRerender(this._state);
-    },
-
-    addMessage() {
-        if (this._state.Messages.innerInput != "") {
-            const newMessage = {
-                text: this._state.Messages.innerInput,
-                id: '1',
-                myMsg: true,
-            }
-
-            this._state.Messages.usersMsgData.push(newMessage)
-            this._callBackRerender(this._state);
-        }
-    },
-
-    updateNewPostText(newText) {
-
-        this._state.Profile.innerTextarea = newText;
-
-        this._callBackRerender(this._state);
-    },
-
-    updateNewMessageText(newText) {
-
-        this._state.Messages.innerInput = newText;
-
-        this._callBackRerender(this._state);
-    },
+    _callSubscriber() { },
 
     subscribe(observer) {
-        this._callBackRerender = observer;
+        this._callSubscriber = observer;
     },
 }
-
-export const addPostActionCreator = () => ({
-    type: ADD_POST
-})
-
-
-export const updateNewPostActionCreator = (text = "") => ({
-    type: UPDATE_NEW_POST,
-    newText: text
-})
-
-export const addMsgActionCreator = () => ({ type: ADD_MESSAGE })
-
-export const updateNewMsgActionCreator = (text = "") => ({
-    type: UPDATE_NEW_MESSAGE,
-    newText: text
-})
-
