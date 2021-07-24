@@ -18,7 +18,6 @@ const MyPosts = (props) => {
     const changeTextarea = () => {
         let innerTextarea = textareaRef.current.value;
         props.dispatch(updateNewPostActionCreator(innerTextarea));
-
     }
 
     return (

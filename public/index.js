@@ -3,9 +3,8 @@ import { render } from 'react-dom'
 
 import '../src/index.scss';
 
-import { store } from '../src/redux/state'
+import store from '../src/redux/redux-store'
 import App from '../src/components/App';
-//import rerenderTree from '../src/render';
 
 const rerenderTree = (state) => {
     render(
@@ -18,5 +17,7 @@ const rerenderTree = (state) => {
 
 rerenderTree(store.getState());
 
-store.subscribe(rerenderTree);
+store.subscribe(() => {
+    rerenderTree(store.getState())
+});
 

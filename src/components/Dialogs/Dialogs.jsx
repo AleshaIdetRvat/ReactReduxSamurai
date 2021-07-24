@@ -4,10 +4,7 @@ import './Dialogs.scss'
 import Message from './Message/Message'
 import { addMsgActionCreator, updateNewMsgActionCreator } from '../../redux/dialogs_reducer'
 
-
-
 const Dialogs = (props) => {
-
     let usersElements = props.dialogsData.usersData.map(user => <Person Name={user.name} personId={user.id} />)
 
     let usersMsgElements = props.dialogsData.usersMsgData.map(msg => <Message Text={msg.text} myMsg={msg.myMsg} />)
