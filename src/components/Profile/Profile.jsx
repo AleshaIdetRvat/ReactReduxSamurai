@@ -1,23 +1,22 @@
-import React from 'react'
-import MyPosts from './MyPosts/MyPosts'
-import ProfHead from './ProfHead/ProfHead'
-import mainImage from './main_image.png'
-import './Profile.scss'
+import React from "react";
+import MyPosts from "./MyPosts/MyPosts";
+import ProfHead from "./ProfHead/ProfHead";
+import mainImage from "./main_image.png";
+import "./Profile.scss";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
     return (
         <div class="profile">
             <div class="profile__grid">
                 <ProfHead Name="Alexey Alexeevskiy" profAva={mainImage} />
-                <MyPosts
+                <MyPostsContainer
                     profileData={props.profileData}
-                    dispatch={props.dispatch} />
-
+                    dispatch={props.dispatch}
+                />
             </div>
-
-
         </div>
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;
