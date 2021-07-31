@@ -1,22 +1,24 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React from "react";
+import { render } from "react-dom";
+import StoreContext from "../src/storeContext";
 
-import '../src/index.scss';
+import "../src/index.scss";
 
-import { store } from '../src/redux/state'
-import App from '../src/components/App';
-//import rerenderTree from '../src/render';
+import { store } from "../src/redux/store";
+import reduxStore from "../src/redux/reduxStore";
+import App from "../src/components/App";
 
-const rerenderTree = (state) => {
+const rerenderTree = (store) => {
     render(
-        <App appState={state}
-            dispatch={store.dispatch.bind(store)}
-        />,
+        <StoreContext.Provider value={store}>
+            <App />
+        </StoreContext.Provider>,
         document.getElementById("root")
-    )
-}
+    );
+};
 
-rerenderTree(store.getState());
+rerenderTree(reduxStore);
 
-store.subscribe(rerenderTree);
-
+reduxStore.subscribe(() => {
+    rerenderTree(reduxStore);
+});

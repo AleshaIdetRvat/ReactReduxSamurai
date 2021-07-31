@@ -10,30 +10,18 @@ import Dialogs from "./Dialogs/Dialogs";
 import News from "./News/News";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 
-const App = (props) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div class="app">
                 <Header />
                 <Sidebar />
                 <div class="app__content">
-                    <Route
-                        path="/profile"
-                        render={() => (
-                            <Profile
-                                profileData={props.appState.Profile}
-                                dispatch={props.dispatch}
-                            />
-                        )}
-                    />
+                    <Route path="/profile" render={() => <Profile />} />
+
                     <Route
                         path="/dialogs"
-                        render={() => (
-                            <DialogsContainer
-                                dialogsData={props.appState.Messages}
-                                dispatch={props.dispatch}
-                            />
-                        )}
+                        render={() => <DialogsContainer />}
                     />
                     <Route path="/news" component={News} />
                 </div>

@@ -1,10 +1,6 @@
 import React from "react";
 import "./MyPosts.scss";
 import Post from "./Post/Post";
-import {
-    addPostActionCreator,
-    updateNewPostActionCreator,
-} from "../../../redux/state";
 
 const MyPosts = ({ addPost, profileData, updateTextarea }) => {
     let postsElements = profileData.postsData.map((postData) => (
