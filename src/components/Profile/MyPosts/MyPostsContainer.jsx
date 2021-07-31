@@ -4,30 +4,26 @@ import {
     addPostActionCreator,
     updateNewPostActionCreator,
 } from "../../../redux/store";
-import StoreContext from "../../../storeContext";
 
-const MyPostsContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                const addPost = () => {
-                    store.dispatch(addPostActionCreator());
-                    //store.dispatch(updateNewPostActionCreator());
-                };
+import { connect } from "react-redux";
 
-                const updateTextarea = (innerTextarea) => {
-                    store.dispatch(updateNewPostActionCreator(innerTextarea));
-                };
-                return (
-                    <MyPosts
-                        addPost={addPost}
-                        updateTextarea={updateTextarea}
-                        profileData={store.getState().Profile}
-                    />
-                );
-            }}
-        </StoreContext.Consumer>
-    );
+const mapStateToProps = (state) => {
+    return {
+        profileData: state.Profile,
+    };
 };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: () => {
+            dispatch(addPostActionCreator());
+        },
+        updateTextarea: (innerTextarea) => {
+            dispatch(updateNewPostActionCreator(innerTextarea));
+        },
+    };
+};
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 export default MyPostsContainer;

@@ -6,7 +6,7 @@ import "../style/app.scss";
 import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
 import Profile from "./Profile/Profile";
-import Dialogs from "./Dialogs/Dialogs";
+
 import News from "./News/News";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 
