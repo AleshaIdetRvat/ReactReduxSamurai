@@ -23,6 +23,7 @@ const ProfileReducer = (state = defaultState, action) => {
                 };
 
                 state.postsData.push(newPost);
+                state.innerTextarea = "";
             }
             break;
 

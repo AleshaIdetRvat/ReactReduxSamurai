@@ -13,7 +13,7 @@ const DialogsContainer = () => {
             {(store) => {
                 const addMsg = () => {
                     store.dispatch(addMsgActionCreator());
-                    store.dispatch(updateNewMsgActionCreator());
+                    //store.dispatch(updateNewMsgActionCreator());
                 };
                 const updateInput = (innerInputNew) => {
                     store.dispatch(updateNewMsgActionCreator(innerInputNew));

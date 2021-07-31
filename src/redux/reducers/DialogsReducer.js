@@ -31,6 +31,7 @@ const DialogsReducer = (state = defaultState, action) => {
                 };
 
                 state.usersMsgData.push(newMessage);
+                state.innerInput = "";
             }
             break;
 

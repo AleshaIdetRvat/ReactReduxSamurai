@@ -12,7 +12,7 @@ const MyPostsContainer = () => {
             {(store) => {
                 const addPost = () => {
                     store.dispatch(addPostActionCreator());
-                    store.dispatch(updateNewPostActionCreator());
+                    //store.dispatch(updateNewPostActionCreator());
                 };
 
                 const updateTextarea = (innerTextarea) => {
