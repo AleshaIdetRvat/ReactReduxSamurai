@@ -13,27 +13,35 @@ const defaultState = {
 };
 
 const ProfileReducer = (state = defaultState, action) => {
+    const copiedState = {
+        ...state,
+        postsData: [...state.postsData],
+    };
+
     switch (action.type) {
         case ADD_POST:
             if (state.innerTextarea != "") {
-                const newPost = {
+                var newPost = {
                     likes_count: "0",
                     message: state.innerTextarea,
                     id: 7,
                 };
-
-                state.postsData.push(newPost);
-                state.innerTextarea = "";
+                return {
+                    ...state,
+                    postsData: [...state.postsData, newPost],
+                    innerTextarea: "",
+                };
             }
-            break;
+            return state;
 
         case UPDATE_NEW_POST:
-            state.innerTextarea = action.newText;
-
-            break;
+            return {
+                ...state,
+                innerTextarea: action.newText,
+            };
         default:
-            break;
+            return state;
     }
-    return state;
+    return copiedState;
 };
 export default ProfileReducer;

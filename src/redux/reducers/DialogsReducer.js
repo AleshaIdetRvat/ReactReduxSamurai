@@ -24,24 +24,27 @@ const DialogsReducer = (state = defaultState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             if (state.innerInput != "") {
-                const newMessage = {
+                var newMessage = {
                     text: state.innerInput,
                     id: "1",
                     myMsg: true,
                 };
-
-                state.usersMsgData.push(newMessage);
-                state.innerInput = "";
+                return {
+                    ...state,
+                    usersMsgData: [...state.usersMsgData, newMessage],
+                    innerInput: "",
+                };
             }
-            break;
+            return state;
 
         case UPDATE_NEW_MESSAGE:
-            state.innerInput = action.newText;
-            break;
+            return {
+                ...state,
+                innerInput: action.newText,
+            };
 
         default:
-            break;
+            return state;
     }
-    return state;
 };
 export default DialogsReducer;

@@ -5,7 +5,6 @@ import Message from "./Message/Message";
 
 const Dialogs = ({ dialogsData, addMsg, updateInput }) => {
     //debugger;
-    const AAA = dialogsData;
     let usersElements = dialogsData.usersData.map((user) => (
         <Person Name={user.name} personId={user.id} />
     ));
