@@ -1,0 +1,31 @@
+.users-page {
+    height: 100%;
+    min-height: 650px;
+    padding: 10px;
+    &__grid {
+        height: 100%;
+        display: grid;
+        grid-template: 1fr auto / 1fr;
+    }
+
+    &__body {
+        display: grid;
+        grid-template: repeat(4, 1fr) / 1fr;
+    }
+
+    &__item {
+    }
+
+    &__btn-showmore {
+        justify-self: center;
+        padding: 10px 50px;
+        background-color: rgb(250, 213, 179);
+        font-size: 2rem;
+        border-radius: 12px;
+        transition: 0.2s;
+        &:hover {
+            opacity: 0.5;
+            //color: rgb(189, 205, 235);
+        }
+    }
+}

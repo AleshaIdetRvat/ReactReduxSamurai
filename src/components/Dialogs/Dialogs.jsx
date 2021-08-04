@@ -3,14 +3,16 @@ import Person from "./Person/Person";
 import "./Dialogs.scss";
 import Message from "./Message/Message";
 
+import PropTypes from "prop-types";
+
 const Dialogs = ({ dialogsData, addMsg, updateInput }) => {
     //debugger;
     let usersElements = dialogsData.usersData.map((user) => (
-        <Person Name={user.name} personId={user.id} />
+        <Person Name={user.name} personId={user.id} key={user.id} />
     ));
 
     let usersMsgElements = dialogsData.usersMsgData.map((msg) => (
-        <Message Text={msg.text} myMsg={msg.myMsg} />
+        <Message Text={msg.text} myMsg={msg.myMsg} key={msg.id} />
     ));
 
     let newMessageRef = React.createRef();
@@ -34,9 +36,7 @@ const Dialogs = ({ dialogsData, addMsg, updateInput }) => {
                     <div class="dialogs__chat chat">
                         <div class="chat__body">
                             <div class="chat__messageS messageS">
-                                <div class="messageS__grid">
-                                    {usersMsgElements}
-                                </div>
+                                <div class="messageS__grid">{usersMsgElements}</div>
                             </div>
 
                             <div class="chat__send send">
@@ -48,10 +48,7 @@ const Dialogs = ({ dialogsData, addMsg, updateInput }) => {
                                         placeholder="Your message"
                                         class="send__input"
                                     />
-                                    <button
-                                        onClick={clickSend}
-                                        class="send__btn"
-                                    >
+                                    <button onClick={clickSend} class="send__btn">
                                         Send
                                     </button>
                                 </div>
@@ -62,6 +59,14 @@ const Dialogs = ({ dialogsData, addMsg, updateInput }) => {
             </div>
         </div>
     );
+};
+
+Dialogs.propTypes = {
+    dialogsData: PropTypes.shape({
+        usersData: PropTypes.array,
+        usersMsgData: PropTypes.array,
+        innerInput: PropTypes.string,
+    }).isRequired,
 };
 
 export default Dialogs;

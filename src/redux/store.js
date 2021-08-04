@@ -1,8 +1,3 @@
-export const ADD_POST = "ADD-POST";
-export const UPDATE_NEW_POST = "UPDATE-NEW-POST";
-export const ADD_MESSAGE = "ADD-MESSAGE";
-export const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
-
 import ProfileReducer from "./reducers/ProfileReducer";
 import DialogsReducer from "./reducers/DialogsReducer";
 import SidebarReducer from "./reducers/SidebarReducer";
@@ -62,19 +57,3 @@ export let store = {
         this._callBackRerender = observer;
     },
 };
-
-export const addPostActionCreator = () => ({
-    type: ADD_POST,
-});
-
-export const updateNewPostActionCreator = (text = "") => ({
-    type: UPDATE_NEW_POST,
-    newText: text,
-});
-
-export const addMsgActionCreator = () => ({ type: ADD_MESSAGE });
-
-export const updateNewMsgActionCreator = (text = "") => ({
-    type: UPDATE_NEW_MESSAGE,
-    newText: text,
-});

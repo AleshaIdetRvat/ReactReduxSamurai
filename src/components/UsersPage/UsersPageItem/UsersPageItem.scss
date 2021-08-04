@@ -1,0 +1,60 @@
+.users-page-item {
+    &__body {
+    }
+
+    &__grid {
+        display: grid;
+        grid-template: 1fr auto / minmax(100px, auto) 1fr;
+        gap: 10px;
+    }
+
+    &__avatar {
+        justify-self: center;
+        height: 85px;
+        width: 85px;
+        border-radius: 50%;
+        background-color: rgb(240, 188, 140);
+    }
+
+    &__status {
+        grid-row: span 2;
+        border: 5px solid rgba(189, 205, 235, 0.815);
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    &__follow {
+        align-self: start;
+    }
+
+    &__follow-btn {
+        width: 100%;
+        font-size: 1.5rem;
+        background-color: rgba(145, 202, 255, 0.665);
+        padding: 5px;
+        border-radius: 12px;
+    }
+}
+
+.status-grid {
+    display: grid;
+    grid-template: repeat(3, 1fr) / auto 1fr auto;
+    &__name {
+        font-size: 2rem;
+        grid-row: span 2;
+        grid-column: span 2;
+    }
+
+    &__contry {
+        font-weight: 600;
+        text-align: right;
+    }
+
+    &__city {
+        text-align: right;
+    }
+
+    &__myself {
+        align-self: end;
+    }
+}

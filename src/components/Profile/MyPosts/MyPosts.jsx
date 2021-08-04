@@ -4,7 +4,11 @@ import Post from "./Post/Post";
 
 const MyPosts = ({ addPost, profileData, updateTextarea }) => {
     let postsElements = profileData.postsData.map((postData) => (
-        <Post likes_count={postData.likes_count} message={postData.message} />
+        <Post
+            likes_count={postData.likes_count}
+            message={postData.message}
+            key={postData.id}
+        />
     ));
 
     const textareaRef = React.createRef();

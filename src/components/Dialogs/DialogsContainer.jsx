@@ -3,7 +3,7 @@ import Dialogs from "./Dialogs";
 import {
     addMsgActionCreator,
     updateNewMsgActionCreator,
-} from "../../redux/store";
+} from "../../redux/reducers/DialogsReducer";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {

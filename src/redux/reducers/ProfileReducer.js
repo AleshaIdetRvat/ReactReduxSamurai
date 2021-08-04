@@ -1,4 +1,5 @@
-import { ADD_POST, UPDATE_NEW_POST } from "../store";
+export const ADD_POST = "ADD-POST";
+export const UPDATE_NEW_POST = "UPDATE-NEW-POST";
 
 const defaultState = {
     postsData: [
@@ -13,11 +14,6 @@ const defaultState = {
 };
 
 const ProfileReducer = (state = defaultState, action) => {
-    const copiedState = {
-        ...state,
-        postsData: [...state.postsData],
-    };
-
     switch (action.type) {
         case ADD_POST:
             if (state.innerTextarea != "") {
@@ -42,6 +38,14 @@ const ProfileReducer = (state = defaultState, action) => {
         default:
             return state;
     }
-    return copiedState;
 };
+export const addPostActionCreator = () => ({
+    type: ADD_POST,
+});
+
+export const updateNewPostActionCreator = (text = "") => ({
+    type: UPDATE_NEW_POST,
+    newText: text,
+});
+
 export default ProfileReducer;

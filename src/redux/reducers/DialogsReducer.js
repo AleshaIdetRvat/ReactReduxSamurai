@@ -1,4 +1,5 @@
-import { ADD_MESSAGE, UPDATE_NEW_MESSAGE } from "../store";
+export const ADD_MESSAGE = "ADD-MESSAGE";
+export const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
 
 const defaultState = {
     usersData: [
@@ -47,4 +48,12 @@ const DialogsReducer = (state = defaultState, action) => {
             return state;
     }
 };
+
+export const addMsgActionCreator = () => ({ type: ADD_MESSAGE });
+
+export const updateNewMsgActionCreator = (text = "") => ({
+    type: UPDATE_NEW_MESSAGE,
+    newText: text,
+});
+
 export default DialogsReducer;

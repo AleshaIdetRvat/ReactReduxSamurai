@@ -1,6 +1,6 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import './Sidebar.scss'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./Sidebar.scss";
 
 const Sidebar = () => {
     return (
@@ -14,6 +14,9 @@ const Sidebar = () => {
                         <NavLink to="/dialogs">Messages</NavLink>
                     </li>
                     <li class="sidebar__item">
+                        <NavLink to="/users">Find Users</NavLink>
+                    </li>
+                    <li class="sidebar__item">
                         <NavLink to="/news">News</NavLink>
                     </li>
                     <li class="sidebar__item">
@@ -25,7 +28,7 @@ const Sidebar = () => {
                 </ul>
             </div>
         </nav>
-    )
-}
+    );
+};
 
-export default Sidebar
+export default Sidebar;
