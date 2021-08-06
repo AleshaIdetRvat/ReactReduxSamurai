@@ -2,6 +2,7 @@ import UsersPage from "./UsersPage";
 import { followAC, unfollowAC, setUsersAC } from "../../redux/reducers/UsersPageReducer";
 
 import { connect } from "react-redux";
+import UsersPageClass from "./UsersPageClass";
 
 const mapStateToProps = (state) => {
     return {
@@ -23,6 +24,6 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const UsersPageContainer = connect(mapStateToProps, mapDispatchToProps)(UsersPage);
+const UsersPageContainer = connect(mapStateToProps, mapDispatchToProps)(UsersPageClass);
 
 export default UsersPageContainer;

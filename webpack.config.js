@@ -1,6 +1,6 @@
-const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
+const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode: "development",
@@ -8,17 +8,18 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].[hash].js",
-        publicPath: '/'
+        publicPath: "/",
     },
     devServer: {
         historyApiFallback: true,
+        port: 3001,
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: [".js", ".jsx"],
     },
     plugins: [
         new HTMLWebpackPlugin({ template: "./public/index.html" }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
     ],
     module: {
         rules: [
@@ -35,7 +36,7 @@ module.exports = {
             },
             {
                 test: /\.(jpg|jpeg|png|svg)/,
-                use: ['file-loader']
+                use: ["file-loader"],
             },
             {
                 test: /\.js$/,
@@ -43,9 +44,9 @@ module.exports = {
                 loader: {
                     loader: "babel-loader",
                     options: {
-                        presets: ["@babel/preset-react", "@babel/preset-env"]
-                    }
-                }
+                        presets: ["@babel/preset-react", "@babel/preset-env"],
+                    },
+                },
             },
             {
                 test: /\.jsx$/,
@@ -53,10 +54,16 @@ module.exports = {
                 loader: {
                     loader: "babel-loader",
                     options: {
-                        presets: ["@babel/preset-react", "@babel/preset-env"]
-                    }
-                }
-            }
-        ]
-    }
-}
+                        presets: [
+                            "@babel/preset-react",
+                            "@babel/preset-env",
+                            {
+                                plugins: ["@babel/plugin-proposal-class-properties"],
+                            },
+                        ],
+                    },
+                },
+            },
+        ],
+    },
+};

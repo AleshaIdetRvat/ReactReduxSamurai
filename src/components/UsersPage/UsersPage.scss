@@ -11,6 +11,7 @@
     &__body {
         display: grid;
         grid-template: repeat(4, 1fr) / 1fr;
+        gap: 20px;
     }
 
     &__item {

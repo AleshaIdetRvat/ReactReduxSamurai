@@ -1,11 +1,23 @@
 import React from "react";
 import "./UsersPageItem.scss";
-const UsersPageItem = ({ fullname, location, status, followed, follow, unfollow }) => {
+const UsersPageItem = ({
+    fullname,
+    location,
+    status,
+    followed,
+    follow,
+    unfollow,
+    avatar,
+}) => {
     return (
         <div class="users-page__item users-page-item">
             <div class="users-page-item__body">
                 <div class="users-page-item__grid">
-                    <div class="users-page-item__avatar"></div>
+                    {avatar ? (
+                        <img src={avatar} />
+                    ) : (
+                        <div class="users-page-item__avatar"></div>
+                    )}
 
                     <div class="users-page-item__status status-grid">
                         <div class="status-grid__name">{fullname}</div>
