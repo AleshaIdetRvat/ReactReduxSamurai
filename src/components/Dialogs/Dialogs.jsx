@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 
 import PropTypes from "prop-types";
 
-const Dialogs = ({ dialogsData, addMsg, updateInput }) => {
+const Dialogs = ({ dialogsData, addMsg, updateNewMsg }) => {
     //debugger;
     let usersElements = dialogsData.usersData.map((user) => (
         <Person Name={user.name} personId={user.id} key={user.id} />
@@ -22,7 +22,7 @@ const Dialogs = ({ dialogsData, addMsg, updateInput }) => {
     };
     const changeInput = () => {
         let innerInputNew = newMessageRef.current.value;
-        updateInput(innerInputNew);
+        updateNewMsg(innerInputNew);
     };
 
     return (

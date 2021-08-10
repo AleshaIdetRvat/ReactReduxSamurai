@@ -1,0 +1,67 @@
+/////  CSS LODER /////
+.preloader {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.747);
+    transition: 0.3s;
+    animation: cssload-opacity 0.8s;
+    &__wall {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    &__spin-box {
+        transition: 0.3s;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        transform: translateY(500px);
+
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        box-shadow: 70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223),
+            -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223);
+        animation: cssload-spin ease infinite 4.6s;
+    }
+}
+
+@keyframes cssload-opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes cssload-spin {
+    0%,
+    100% {
+        box-shadow: 70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223),
+            -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223);
+    }
+    25% {
+        box-shadow: -70px 70px rgb(223, 223, 223), -70px -70px rgb(79, 77, 73),
+            70px -70px rgb(223, 223, 223), 70px 70px rgb(79, 77, 73);
+    }
+    50% {
+        box-shadow: -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223),
+            70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223);
+    }
+    75% {
+        box-shadow: 70px -70px #dfdfdf, 70px 70px #4f4d49, -70px 70px #dfdfdf,
+            -70px -70px #4f4d49;
+    }
+}
+
+///////////////////////////////

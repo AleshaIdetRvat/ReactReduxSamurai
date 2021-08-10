@@ -1,8 +1,9 @@
 import React from "react";
+import Preloader from "../common/Preloader/Preloader";
 import "./UsersPage.scss";
 import UsersPageItem from "./UsersPageItem/UsersPageItem";
 
-const UsersPage = ({ users, currentPage, selectPage, unfollow, follow }) => {
+const UsersPage = ({ users, currentPage, selectPage, unfollow, follow, isFetching }) => {
     return (
         <div class="users-page">
             <div class="users-page__grid">
@@ -74,6 +75,7 @@ const UsersPage = ({ users, currentPage, selectPage, unfollow, follow }) => {
                     )}
                 </ul>
                 <div class="users-page__body">
+                    {/* {isFetching ? <Preloader /> : ""} */}
                     {users.map((user) => (
                         <UsersPageItem
                             key={user.id}

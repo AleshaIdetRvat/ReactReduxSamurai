@@ -1,5 +1,6 @@
 import * as axios from "axios";
 import React from "react";
+import Preloader from "../common/Preloader/Preloader";
 import UsersPage from "./UsersPage";
 
 class UsersPageClass extends React.Component {
@@ -7,11 +8,13 @@ class UsersPageClass extends React.Component {
         currentPage = this.props.currentPage,
         pageSize = this.props.pageSize
     ) {
+        this.props.fetching();
         axios
             .get(
                 `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`
             )
             .then((response) => {
+                this.props.endFetching();
                 this.props.setUsers(
                     response.data.items.map((user) => {
                         return {
@@ -40,14 +43,21 @@ class UsersPageClass extends React.Component {
 
     render() {
         return (
-            <UsersPage
-                currentPage={this.props.currentPage}
-                users={this.props.users}
-                totalUsersCount={this.props.totalUsersCount}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
-                selectPage={this.selectPage}
-            />
+            <>
+                {this.props.isFetching ? (
+                    <Preloader />
+                ) : (
+                    <UsersPage
+                        isFetching={this.props.isFetching}
+                        currentPage={this.props.currentPage}
+                        users={this.props.users}
+                        totalUsersCount={this.props.totalUsersCount}
+                        follow={this.props.follow}
+                        unfollow={this.props.unfollow}
+                        selectPage={this.selectPage}
+                    />
+                )}
+            </>
         );
     }
 }
