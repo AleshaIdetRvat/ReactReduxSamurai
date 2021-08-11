@@ -20,29 +20,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         endFetching: () => {
-//             dispatch(endFetching());
-//         },
-//         fetching: () => {
-//             dispatch(fetching());
-//         },
-//         follow: (userId) => {
-//             dispatch(follow(userId));
-//         },
-//         unfollow: (userId) => {
-//             dispatch(unfollow(userId));
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsers(users));
-//         },
-//         setCurrentPage: (page) => {
-//             dispatch(setCurrentPage(page));
-//         },
-//     };
-// };
-
 const UsersPageContainer = connect(mapStateToProps, {
     endFetching,
     fetching,

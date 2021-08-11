@@ -5,11 +5,11 @@ import mainImage from "./main_image.png";
 import "./Profile.scss";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div class="profile">
             <div class="profile__grid">
-                <ProfHead Name="Alexey Alexeevskiy" profAva={mainImage} />
+                <ProfHead {...props.userProfileData} />
                 <MyPostsContainer />
             </div>
         </div>

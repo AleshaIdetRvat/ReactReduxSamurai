@@ -78,7 +78,7 @@ const UsersPage = ({ users, currentPage, selectPage, unfollow, follow, isFetchin
                     {/* {isFetching ? <Preloader /> : ""} */}
                     {users.map((user) => (
                         <UsersPageItem
-                            key={user.id}
+                            id={user.id}
                             fullname={user.fullname}
                             location={user.location}
                             status={user.status}

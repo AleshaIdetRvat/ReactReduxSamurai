@@ -3,21 +3,21 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import "../style/app.scss";
 
-import Header from "./Header/Header";
+import HeaderContainer from "./Header/HeaderContainer";
 import Sidebar from "./Sidebar/Sidebar";
-import Profile from "./Profile/Profile";
 import News from "./News/News";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import UsersPageContainer from "./UsersPage/UsersPageContainer";
+import ProfileContainer from "./Profile/ProfileContainer";
 
 const App = () => {
     return (
         <BrowserRouter>
             <div class="app">
-                <Header />
+                <HeaderContainer />
                 <Sidebar />
                 <div class="app__content">
-                    <Route path="/profile" render={() => <Profile />} />
+                    <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
 
                     <Route path="/dialogs" render={() => <DialogsContainer />} />
 

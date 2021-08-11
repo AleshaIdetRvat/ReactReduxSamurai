@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./UsersPageItem.scss";
 const UsersPageItem = ({
     fullname,
@@ -8,16 +9,15 @@ const UsersPageItem = ({
     follow,
     unfollow,
     avatar,
+    id,
 }) => {
     return (
         <div class="users-page__item users-page-item">
             <div class="users-page-item__body">
                 <div class="users-page-item__grid">
-                    {avatar ? (
-                        <img src={avatar} />
-                    ) : (
-                        <div class="users-page-item__avatar"></div>
-                    )}
+                    <NavLink class="users-page-item__avatar" to={`/profile/${id}`}>
+                        {avatar ? <img src={avatar} /> : ""}
+                    </NavLink>
 
                     <div class="users-page-item__status status-grid">
                         <div class="status-grid__name">{fullname}</div>
