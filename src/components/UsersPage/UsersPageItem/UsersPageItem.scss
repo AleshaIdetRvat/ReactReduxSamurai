@@ -69,6 +69,20 @@
             opacity: 0.8;
         }
     }
+    .unfollow-btn {
+        //color: white;
+        background-color: rgb(206, 92, 92);
+
+        &:hover {
+            background-color: rgb(223, 83, 83);
+            box-shadow: 0px 5px 5px rgba(90, 24, 24, 0.6);
+
+            //letter-spacing: 1px;
+        }
+        &:active {
+            box-shadow: 0px 2px 5px rgba(90, 24, 24, 0.6);
+        }
+    }
 }
 
 .status-grid {

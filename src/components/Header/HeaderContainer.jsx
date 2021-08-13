@@ -3,27 +3,23 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
 import { setAuthUserData } from "../../redux/reducers/AuthReducer";
+import { requstMyData } from "../api/api";
 
 class HeaderContainer extends Component {
-    requstUserData() {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-                withCredentials: true,
+    getMyData() {
+        requstMyData()
+            .then((data) => {
+                //debugger;
+                console.log(data);
+                this.props.setAuthUserData(data.id, data.email, data.login);
             })
-            .then((response) => {
-                console.log(response.data);
-                if (!response.data.resultCode) {
-                    this.props.setAuthUserData(
-                        response.data.data.id,
-                        response.data.data.email,
-                        response.data.data.login
-                    );
-                }
+            .catch((reason) => {
+                console.log(reason);
             });
     }
 
     componentDidMount() {
-        this.requstUserData();
+        this.getMyData();
     }
     render() {
         return <Header {...this.props} />;

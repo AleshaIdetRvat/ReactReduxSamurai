@@ -2,6 +2,8 @@ import React from "react";
 import Preloader from "../common/Preloader/Preloader";
 import "./UsersPage.scss";
 import UsersPageItem from "./UsersPageItem/UsersPageItem";
+import axios from "axios";
+import { requestFollow, requestUnfollow } from "../api/api";
 
 const UsersPage = ({ users, currentPage, selectPage, unfollow, follow, isFetching }) => {
     return (
@@ -79,16 +81,30 @@ const UsersPage = ({ users, currentPage, selectPage, unfollow, follow, isFetchin
                     {users.map((user) => (
                         <UsersPageItem
                             id={user.id}
+                            key={user.id}
                             fullname={user.fullname}
                             location={user.location}
                             status={user.status}
                             followed={user.followed}
                             avatar={user.avatar}
                             follow={() => {
-                                follow(user.id);
+                                //debugger;
+                                requestFollow(user.id)
+                                    .then((response) => {
+                                        follow(user.id);
+                                    })
+                                    .catch((reason) => {
+                                        console.log(reason);
+                                    });
                             }}
                             unfollow={() => {
-                                unfollow(user.id);
+                                requestUnfollow(user.id)
+                                    .then((response) => {
+                                        unfollow(user.id);
+                                    })
+                                    .catch((reason) => {
+                                        console.log(reason);
+                                    });
                             }}
                         />
                     ))}

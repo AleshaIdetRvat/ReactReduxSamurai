@@ -30,7 +30,7 @@ const UsersPageItem = ({
                         {followed ? (
                             <button
                                 onClick={unfollow}
-                                class="users-page-item__follow-btn"
+                                class="users-page-item__follow-btn unfollow-btn"
                             >
                                 unfollow
                             </button>

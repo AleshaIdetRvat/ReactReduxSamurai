@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 
 class ProfileContainer extends React.Component {
     requestUserPersonalData() {
-        console.log(this.props.match.params.userId);
+        console.log(this.props);
         this.props.toggleSetFetching(true);
         axios
             .get(
@@ -17,13 +17,13 @@ class ProfileContainer extends React.Component {
                 }`
             )
             .then((response) => {
+                debugger;
                 this.props.setUserProfile(response.data);
                 this.props.toggleSetFetching(false);
             });
     }
 
     componentDidMount() {
-        debugger;
         this.requestUserPersonalData();
     }
 

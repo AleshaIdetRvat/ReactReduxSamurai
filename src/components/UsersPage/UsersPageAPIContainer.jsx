@@ -1,44 +1,38 @@
-import * as axios from "axios";
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
 import UsersPage from "./UsersPage";
+import { requestUsersData } from "../api/api";
 
 class UsersPageClass extends React.Component {
-    requestUsersData(
-        currentPage = this.props.currentPage,
-        pageSize = this.props.pageSize
-    ) {
+    getUsers(currentPage = this.props.currentPage, pageSize = this.props.pageSize) {
         this.props.fetching();
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`
-            )
-            .then((response) => {
-                this.props.endFetching();
-                this.props.setUsers(
-                    response.data.items.map((user) => {
-                        return {
-                            id: user.id,
-                            fullname: user.name,
-                            location: {
-                                contry: "Russia",
-                                city: "Moscow",
-                            },
-                            status: user.status,
-                            followed: user.followed,
-                            avatar: user.photos.small,
-                        };
-                    })
-                );
-            });
+
+        requestUsersData(currentPage, pageSize).then((data) => {
+            this.props.endFetching();
+            this.props.setUsers(
+                data.items.map((user) => {
+                    return {
+                        id: user.id,
+                        fullname: user.name,
+                        location: {
+                            contry: "Russia",
+                            city: "Moscow",
+                        },
+                        status: user.status,
+                        followed: user.followed,
+                        avatar: user.photos.small,
+                    };
+                })
+            );
+        });
     }
 
     componentDidMount() {
-        this.requestUsersData();
+        this.getUsers();
     }
     selectPage = (pageNum) => {
         this.props.setCurrentPage(this.props.currentPage + pageNum);
-        this.requestUsersData(this.props.currentPage + pageNum);
+        this.getUsers(this.props.currentPage + pageNum);
     };
 
     render() {
