@@ -49,6 +49,8 @@ class UsersPageClass extends React.Component {
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
                         selectPage={this.selectPage}
+                        followingInProgress={this.props.followingInProgress}
+                        followingInProgressState={this.props.followingInProgressState}
                     />
                 )}
             </>

@@ -57,3 +57,9 @@ export let store = {
         this._callBackRerender = observer;
     },
 };
+const ADD_CREATOR = "ADD_CREATOR";
+
+const addMsgActionCreator = (msg) => ({
+    type: "ADD_MSG",
+    msg: msg,
+});

@@ -10,6 +10,7 @@ const UsersPageItem = ({
     unfollow,
     avatar,
     id,
+    followingInProgressState,
 }) => {
     return (
         <div class="users-page__item users-page-item">
@@ -29,13 +30,22 @@ const UsersPageItem = ({
                     <div class="users-page-item__follow">
                         {followed ? (
                             <button
+                                disabled={followingInProgressState.some(
+                                    (userId) => userId === id
+                                )}
                                 onClick={unfollow}
                                 class="users-page-item__follow-btn unfollow-btn"
                             >
                                 unfollow
                             </button>
                         ) : (
-                            <button onClick={follow} class="users-page-item__follow-btn">
+                            <button
+                                disabled={followingInProgressState.some(
+                                    (userId) => userId === id
+                                )}
+                                onClick={follow}
+                                class="users-page-item__follow-btn"
+                            >
                                 follow
                             </button>
                         )}

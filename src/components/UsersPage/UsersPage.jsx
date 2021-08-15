@@ -5,7 +5,15 @@ import UsersPageItem from "./UsersPageItem/UsersPageItem";
 import axios from "axios";
 import { requestFollow, requestUnfollow } from "../api/api";
 
-const UsersPage = ({ users, currentPage, selectPage, unfollow, follow, isFetching }) => {
+const UsersPage = ({
+    users,
+    currentPage,
+    selectPage,
+    unfollow,
+    follow,
+    followingInProgress,
+    followingInProgressState,
+}) => {
     return (
         <div class="users-page">
             <div class="users-page__grid">
@@ -77,7 +85,6 @@ const UsersPage = ({ users, currentPage, selectPage, unfollow, follow, isFetchin
                     )}
                 </ul>
                 <div class="users-page__body">
-                    {/* {isFetching ? <Preloader /> : ""} */}
                     {users.map((user) => (
                         <UsersPageItem
                             id={user.id}
@@ -89,23 +96,28 @@ const UsersPage = ({ users, currentPage, selectPage, unfollow, follow, isFetchin
                             avatar={user.avatar}
                             follow={() => {
                                 //debugger;
+                                followingInProgress(true, user.id);
                                 requestFollow(user.id)
                                     .then((response) => {
                                         follow(user.id);
+                                        followingInProgress(false, user.id);
                                     })
                                     .catch((reason) => {
                                         console.log(reason);
                                     });
                             }}
                             unfollow={() => {
+                                followingInProgress(true, user.id);
                                 requestUnfollow(user.id)
                                     .then((response) => {
+                                        followingInProgress(false, user.id);
                                         unfollow(user.id);
                                     })
                                     .catch((reason) => {
                                         console.log(reason);
                                     });
                             }}
+                            followingInProgressState={followingInProgressState}
                         />
                     ))}
                 </div>

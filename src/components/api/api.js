@@ -32,7 +32,7 @@ export const requestFollow = (userId) => {
     return new Promise((resolve, reject) => {
         axiosInstance.post(`follow/${userId}`, {}).then((response) => {
             console.log(response);
-            debugger;
+            //debugger;
             if (!response.data.resultCode) {
                 resolve(response.data.data);
             } else {
@@ -46,7 +46,7 @@ export const requestUnfollow = (userId) => {
     return new Promise((resolve, reject) => {
         axiosInstance.delete(`follow/${userId}`).then((response) => {
             console.log(response);
-            debugger;
+            //debugger;
             if (!response.data.resultCode) {
                 resolve(response.data.data);
             } else {

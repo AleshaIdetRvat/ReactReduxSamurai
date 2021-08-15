@@ -15,6 +15,4 @@ const reducerS = combineReducers({
 
 const reduxStore = createStore(reducerS);
 
-window.reduxStore = reduxStore;
-
 export default reduxStore;
