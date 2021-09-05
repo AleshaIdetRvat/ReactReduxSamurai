@@ -1,9 +1,33 @@
 import React from "react";
 import "./MyPosts.scss";
+import { Field, reduxForm } from "redux-form";
 import Post from "./Post/Post";
+import { required, maxLenghtCreator } from "../../utils/validators/validators";
+import MyTextarea from "../../common/FormsControl/MyTextarea";
 
-const MyPosts = ({ addPost, profileData, updateTextarea }) => {
-    let postsElements = profileData.postsData.map((postData) => (
+const maxLenght10 = maxLenghtCreator(10);
+const NewPostForm = ({ handleSubmit }) => {
+    return (
+        <form onSubmit={handleSubmit} class="myposts__newpost">
+            <Field
+                name="newPost"
+                component={MyTextarea}
+                type="text"
+                placeholder="Your post"
+                validate={[required, maxLenght10]}
+                cols="30"
+                rows="2"
+            />
+            <div class="myposts__error"> </div>
+            <button>Add post</button>
+        </form>
+    );
+};
+
+const NewPostReduxForm = reduxForm({ form: "newPost" })(NewPostForm);
+
+const MyPosts = ({ addPost, profileData }) => {
+    const postsElements = profileData.postsData.map((postData) => (
         <Post
             likes_count={postData.likes_count}
             message={postData.message}
@@ -11,32 +35,16 @@ const MyPosts = ({ addPost, profileData, updateTextarea }) => {
         />
     ));
 
-    const textareaRef = React.createRef();
-
-    const clickAddPost = () => {
-        addPost();
-    };
-
-    const changeTextarea = () => {
-        let innerTextarea = textareaRef.current.value;
-        updateTextarea(innerTextarea);
-    };
-
     return (
         <div class="myposts">
-            <div class="myposts__body">
-                <div class="myposts__newpost">
-                    <textarea
-                        onChange={changeTextarea}
-                        ref={textareaRef}
-                        value={profileData.innerTextarea}
-                        placeholder="Your post"
-                        cols="30"
-                        rows="2"
-                    ></textarea>
-                    <button onClick={clickAddPost}>Add post</button>
-                </div>
+            <NewPostReduxForm
+                onSubmit={(values) => {
+                    console.log(values.newPost);
+                    addPost(values.newPost);
+                }}
+            />
 
+            <div class="myposts__body">
                 <div class="myposts__grid">{postsElements}</div>
             </div>
         </div>

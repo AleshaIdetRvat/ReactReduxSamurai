@@ -1,52 +1,67 @@
-import * as axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import Preloader from "../common/Preloader/Preloader";
 import Profile from "./Profile";
-import { setUserProfile, toggleSetFetching } from "../../redux/reducers/ProfileReducer";
 import { withRouter } from "react-router-dom";
+import {
+    getUserPersonDataThunkCreator,
+    getUserStatus,
+    updateUserStatus,
+} from "../../redux/reducers/ProfileReducer";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
-    requestUserPersonalData() {
-        console.log(this.props);
-        this.props.toggleSetFetching(true);
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/profile/${
-                    this.props.match.params.userId || 2
-                }`
-            )
-            .then((response) => {
-                debugger;
-                this.props.setUserProfile(response.data);
-                this.props.toggleSetFetching(false);
-            });
+    componentDidMount() {
+        console.log("componentDidMount");
+        this.props.getUserPersonDataThunkCreator(this.props.match.params.userId);
+        this.props.getUserStatus(this.props.match.params.userId);
     }
 
-    componentDidMount() {
-        this.requestUserPersonalData();
+    componentDidUpdate(prevState) {
+        console.log("UPDATE");
+        if (prevState.match.params.userId != this.props.match.params.userId) {
+            this.props.getUserPersonDataThunkCreator(this.props.match.params.userId);
+            this.props.getUserStatus(this.props.match.params.userId);
+        }
     }
 
     render() {
+        //console.log(this.props);
+        console.log(
+            this.props.match.params.userId,
+            this.props.Profile.userProfileData.userId
+        );
         return (
             <>
                 {this.props.Profile.isFetching ? (
                     <Preloader />
                 ) : (
-                    <Profile userProfileData={this.props.Profile.userProfileData} />
+                    <Profile
+                        updateUserStatus={this.props.updateUserStatus}
+                        userProfileData={this.props.Profile.userProfileData}
+                        status={this.props.Profile.status}
+                        isAuth={this.props.isAuth}
+                        isMyProfile={this.props.myId == this.props.match.params.userId}
+                    />
                 )}
             </>
         );
     }
 }
 
-const withUrlDataProfileContainer = withRouter(ProfileContainer);
-
 const mapStateToProps = (state) => ({
     Profile: state.Profile,
 });
 
-export default connect(mapStateToProps, {
-    setUserProfile,
-    toggleSetFetching,
-})(withUrlDataProfileContainer);
+const mapDispatchToProps = {
+    getUserPersonDataThunkCreator,
+    getUserStatus,
+    updateUserStatus,
+};
+//const uslId =
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect,
+    withRouter
+)(ProfileContainer);

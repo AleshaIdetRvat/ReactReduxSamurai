@@ -1,35 +1,42 @@
 import {
-    follow,
-    unfollow,
     setUsers,
     setCurrentPage,
     endFetching,
     fetching,
     followingInProgress,
+    getUsersThuckCreator,
+    unfollowThunkCreator,
+    followThunkCreator,
 } from "../../redux/reducers/UsersPageReducer";
 
 import { connect } from "react-redux";
+
 import UsersPageAPIContainer from "./UsersPageAPIContainer";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
-const mapStateToProps = (state) => {
-    return {
-        users: state.UsersPage.users,
-        pageSize: state.UsersPage.pageSize,
-        currentPage: state.UsersPage.currentPage,
-        totalUsersCount: state.UsersPage.totalUsersCount,
-        isFetching: state.UsersPage.isFetchingData,
-        followingInProgressState: state.UsersPage.followingInProgressState,
-    };
-};
+const mapStateToProps = (state) => ({
+    users: state.UsersPage.users,
+    pageSize: state.UsersPage.pageSize,
+    currentPage: state.UsersPage.currentPage,
+    totalUsersCount: state.UsersPage.totalUsersCount,
+    isFetching: state.UsersPage.isFetchingData,
+    followingInProgressState: state.UsersPage.followingInProgressState,
+    isAuth: state.Auth.isAuth,
+});
 
-const UsersPageContainer = connect(mapStateToProps, {
+const mapDispatchToProps = {
     endFetching,
     fetching,
-    follow,
-    unfollow,
     setUsers,
     setCurrentPage,
     followingInProgress,
-})(UsersPageAPIContainer);
+    getUsersThuckCreator,
+    unfollowThunkCreator,
+    followThunkCreator,
+};
 
-export default UsersPageContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(UsersPageAPIContainer);

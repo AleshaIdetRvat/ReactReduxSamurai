@@ -1,24 +1,27 @@
-export const ADD_POST = "ADD-POST";
-export const UPDATE_NEW_POST = "UPDATE-NEW-POST";
-export const SET_USER_PROFILE = "SET_USER_PROFILE";
-export const TOGGLE_SET_FETHING = "TOGGLE_SET_FETHING";
+import { profileAPI } from "../../components/api/api";
+
+const ADD_POST = "ADD-POST";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
+const TOGGLE_SET_FETHING = "TOGGLE_SET_FETHING";
 
 const defaultState = {
     postsData: [
-        { id: 1, likes_count: "34", message: "Hello everybody" },
-        { id: 2, likes_count: "5", message: "How are they?" },
-        { id: 3, likes_count: "12", message: "Good day!!!" },
-        { id: 4, likes_count: "34", message: "Hello everybody" },
-        { id: 5, likes_count: "5", message: "How are they?" },
-        { id: 6, likes_count: "12", message: "Good day!!!" },
+        // { id: 1, likes_count: "34", message: "Hello everybody" },
+        // { id: 2, likes_count: "5", message: "How are they?" },
     ],
-    innerTextarea: "",
     userProfileData: {},
     isFetching: true,
+    status: "",
 };
 
 const ProfileReducer = (state = defaultState, action) => {
     switch (action.type) {
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status,
+            };
         case SET_USER_PROFILE:
             return {
                 ...state,
@@ -30,36 +33,26 @@ const ProfileReducer = (state = defaultState, action) => {
                 isFetching: action.isFetching,
             };
         case ADD_POST:
-            if (state.innerTextarea != "") {
-                var newPost = {
+            if (action.newPost != "") {
+                const post = {
                     likes_count: "0",
-                    message: state.innerTextarea,
+                    message: action.newPost,
                     id: 7,
                 };
                 return {
                     ...state,
-                    postsData: [...state.postsData, newPost],
-                    innerTextarea: "",
+                    postsData: [...state.postsData, post],
                 };
             }
             return state;
 
-        case UPDATE_NEW_POST:
-            return {
-                ...state,
-                innerTextarea: action.newText,
-            };
         default:
             return state;
     }
 };
-export const addPostActionCreator = () => ({
+export const addPostActionCreator = (newPost) => ({
     type: ADD_POST,
-});
-
-export const updateNewPostActionCreator = (text = "") => ({
-    type: UPDATE_NEW_POST,
-    newText: text,
+    newPost,
 });
 
 export const setUserProfile = (userData) => ({
@@ -67,9 +60,53 @@ export const setUserProfile = (userData) => ({
     userData,
 });
 
+export const setStatus = (status) => ({
+    type: SET_STATUS,
+    status,
+});
+
 export const toggleSetFetching = (isFetching) => ({
     type: TOGGLE_SET_FETHING,
     isFetching,
 });
+
+export const getUserStatus = (userId) => (dispatch) => {
+    // debugger;
+    dispatch(toggleSetFetching(true));
+
+    profileAPI
+        .requestProfileStatus(userId)
+        .then((data) => {
+            dispatch(setStatus(data));
+            dispatch(toggleSetFetching(false));
+        })
+        .catch((reason) => console.log(reason));
+};
+
+export const updateUserStatus = (status) => (dispatch) => {
+    // debugger;
+    dispatch(toggleSetFetching(true));
+
+    profileAPI
+        .updataProfileStatus(status)
+        .then((data) => {
+            dispatch(setStatus(status));
+            dispatch(toggleSetFetching(false));
+        })
+        .catch((reason) => console.log(reason));
+};
+
+export const getUserPersonDataThunkCreator = (userId) => (dispatch) => {
+    // debugger;
+    dispatch(toggleSetFetching(true));
+
+    profileAPI
+        .requestProfileData(userId)
+        .then((data) => {
+            dispatch(setUserProfile(data));
+            dispatch(toggleSetFetching(false));
+        })
+        .catch((reason) => console.log(reason));
+};
 
 export default ProfileReducer;

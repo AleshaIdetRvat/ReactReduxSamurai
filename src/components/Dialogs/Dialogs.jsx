@@ -2,11 +2,38 @@ import React from "react";
 import Person from "./Person/Person";
 import "./Dialogs.scss";
 import Message from "./Message/Message";
-
+import { Field, reduxForm } from "redux-form";
+import MyTextarea from "../common/FormsControl/MyTextarea";
+import { required, maxLenghtCreator } from "../utils/validators/validators";
 import PropTypes from "prop-types";
+console.log(required);
+const maxLenght20 = maxLenghtCreator(20); //оалдыва ПРолиофыдлва
 
-const Dialogs = ({ dialogsData, addMsg, updateNewMsg }) => {
-    //debugger;
+const NewMsgForm = ({ onSubmit, handleSubmit }) => {
+    return (
+        <form onSubmit={handleSubmit} class="send__grid">
+            <Field
+                isInput={true}
+                component={MyTextarea}
+                validate={[required, maxLenght20]}
+                name="message"
+                type="text"
+                placeholder="Your message"
+                class="send__input"
+            />
+            <button class="send__btn">Send</button>
+        </form>
+    );
+};
+
+const NewMsgReduxForm = reduxForm({ form: "newMsg" })(NewMsgForm);
+
+const Dialogs = ({ dialogsData, addMsg }) => {
+    const onSubmitMsg = (newMsgFormData) => {
+        console.log(newMsgFormData.message);
+        addMsg(newMsgFormData.message);
+    };
+
     let usersElements = dialogsData.usersData.map((user) => (
         <Person Name={user.name} personId={user.id} key={user.id} />
     ));
@@ -14,16 +41,6 @@ const Dialogs = ({ dialogsData, addMsg, updateNewMsg }) => {
     let usersMsgElements = dialogsData.usersMsgData.map((msg) => (
         <Message Text={msg.text} myMsg={msg.myMsg} key={msg.id} />
     ));
-
-    let newMessageRef = React.createRef();
-
-    const clickSend = () => {
-        addMsg();
-    };
-    const changeInput = () => {
-        let innerInputNew = newMessageRef.current.value;
-        updateNewMsg(innerInputNew);
-    };
 
     return (
         <div class="dialogs">
@@ -40,18 +57,7 @@ const Dialogs = ({ dialogsData, addMsg, updateNewMsg }) => {
                             </div>
 
                             <div class="chat__send send">
-                                <div class="send__grid">
-                                    <input
-                                        onChange={changeInput}
-                                        ref={newMessageRef}
-                                        value={dialogsData.innerInput}
-                                        placeholder="Your message"
-                                        class="send__input"
-                                    />
-                                    <button onClick={clickSend} class="send__btn">
-                                        Send
-                                    </button>
-                                </div>
+                                <NewMsgReduxForm onSubmit={onSubmitMsg} />
                             </div>
                         </div>
                     </div>

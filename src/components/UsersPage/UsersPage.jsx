@@ -1,18 +1,15 @@
 import React from "react";
-import Preloader from "../common/Preloader/Preloader";
 import "./UsersPage.scss";
 import UsersPageItem from "./UsersPageItem/UsersPageItem";
-import axios from "axios";
-import { requestFollow, requestUnfollow } from "../api/api";
 
 const UsersPage = ({
     users,
     currentPage,
     selectPage,
-    unfollow,
-    follow,
-    followingInProgress,
     followingInProgressState,
+    unfollowThunkCreator,
+    followThunkCreator,
+    isAuth,
 }) => {
     return (
         <div class="users-page">
@@ -94,30 +91,13 @@ const UsersPage = ({
                             status={user.status}
                             followed={user.followed}
                             avatar={user.avatar}
-                            follow={() => {
-                                //debugger;
-                                followingInProgress(true, user.id);
-                                requestFollow(user.id)
-                                    .then((response) => {
-                                        follow(user.id);
-                                        followingInProgress(false, user.id);
-                                    })
-                                    .catch((reason) => {
-                                        console.log(reason);
-                                    });
-                            }}
-                            unfollow={() => {
-                                followingInProgress(true, user.id);
-                                requestUnfollow(user.id)
-                                    .then((response) => {
-                                        followingInProgress(false, user.id);
-                                        unfollow(user.id);
-                                    })
-                                    .catch((reason) => {
-                                        console.log(reason);
-                                    });
-                            }}
-                            followingInProgressState={followingInProgressState}
+                            follow={() => followThunkCreator(user.id)}
+                            unfollow={() => unfollowThunkCreator(user.id)}
+                            followingInProgressState={() =>
+                                followingInProgressState.some(
+                                    (userId) => userId === user.id
+                                ) || !isAuth
+                            }
                         />
                     ))}
                 </div>

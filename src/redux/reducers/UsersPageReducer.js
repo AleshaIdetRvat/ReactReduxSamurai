@@ -1,3 +1,5 @@
+import { usersAPI } from "../../components/api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -98,5 +100,57 @@ export const setUsers = (users) => ({
     type: SET_USERS,
     users: users,
 });
+
+export const getUsersThuckCreator = (currentPage, pageSize) => (dispatch) => {
+    dispatch(fetching());
+
+    usersAPI.requestUsersData(currentPage, pageSize).then((data) => {
+        dispatch(endFetching());
+        dispatch(
+            setUsers(
+                data.items.map((user) => {
+                    return {
+                        id: user.id,
+                        fullname: user.name,
+                        location: {
+                            contry: "Russia",
+                            city: "Moscow",
+                        },
+                        status: user.status,
+                        followed: user.followed,
+                        avatar: user.photos.small,
+                    };
+                })
+            )
+        );
+    });
+};
+
+export const followThunkCreator = (userId) => (dispatch) => {
+    //debugger;
+    dispatch(followingInProgress(true, userId));
+    usersAPI
+        .requestFollow(userId)
+        .then((response) => {
+            dispatch(follow(userId));
+            dispatch(followingInProgress(false, userId));
+        })
+        .catch((reason) => {
+            console.log(reason);
+        });
+};
+
+export const unfollowThunkCreator = (userId) => (dispatch) => {
+    dispatch(followingInProgress(true, userId));
+    usersAPI
+        .requestUnfollow(userId)
+        .then((response) => {
+            dispatch(followingInProgress(false, userId));
+            dispatch(unfollow(userId));
+        })
+        .catch((reason) => {
+            console.log(reason);
+        });
+};
 
 export default UsersPageReducer;

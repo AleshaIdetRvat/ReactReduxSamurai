@@ -1,14 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { NavLink, withRouter } from "react-router-dom";
+import { compose } from "redux";
 import "./Sidebar.scss";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+    console.log(props);
     return (
         <nav class="sidebar">
             <div class="sidebar__body">
                 <ul class="sidebar__grid">
                     <li class="sidebar__item">
-                        <NavLink to="/profile">Profile</NavLink>
+                        <NavLink to={`/profile/${props.UserId}`}>Profile</NavLink>
                     </li>
                     <li class="sidebar__item">
                         <NavLink to="/dialogs">Messages</NavLink>
@@ -31,4 +34,8 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+const mapStateToProps = (state) => ({
+    UserId: state.Auth.userId,
+});
+
+export default connect(mapStateToProps, {})(Sidebar);

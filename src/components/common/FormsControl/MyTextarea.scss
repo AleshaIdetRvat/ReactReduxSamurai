@@ -1,0 +1,52 @@
+.my-textarea {
+    position: relative;
+
+    textarea,
+    input {
+        position: relative;
+        z-index: 20;
+    }
+    &__error-vertical,
+    &__error-horizontal {
+        white-space: nowrap;
+        transition: 0.1s;
+        position: absolute;
+        z-index: 10;
+
+        top: 5px;
+        background-color: rgb(207, 76, 76);
+        color: white;
+    }
+    &__error-vertical {
+        left: 0;
+        padding: 5px 10px 15px 10px;
+        border-radius: 8px 8px 0 0;
+
+        animation: error-show-vertical 0.3s ease forwards;
+    }
+    &__error-horizontal {
+        right: 0;
+        padding: 5px 10px 5px 10px;
+        border-radius: 8px 0 0 8px;
+
+        animation: error-show-horizontal 0.3s ease forwards;
+    }
+}
+
+@keyframes error-show-vertical {
+    0% {
+        top: 1px;
+    }
+    100% {
+        top: -30px;
+    }
+}
+
+@keyframes error-show-horizontal {
+    0% {
+        right: 0%;
+    }
+    100% {
+        right: 99%;
+    }
+}

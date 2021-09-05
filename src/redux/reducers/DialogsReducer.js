@@ -18,22 +18,20 @@ const defaultState = {
         { text: "tempText", id: "7", myMsg: true },
         { text: "tempText", id: "8", myMsg: false },
     ],
-    innerInput: "",
 };
 
 const DialogsReducer = (state = defaultState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
-            if (state.innerInput != "") {
-                var newMessage = {
-                    text: state.innerInput,
-                    id: "1",
+            if (action.msg != "") {
+                const newMessage = {
+                    text: action.msg,
+                    id: "4",
                     myMsg: true,
                 };
                 return {
                     ...state,
                     usersMsgData: [...state.usersMsgData, newMessage],
-                    innerInput: "",
                 };
             }
             return state;
@@ -49,11 +47,6 @@ const DialogsReducer = (state = defaultState, action) => {
     }
 };
 
-export const addMsg = () => ({ type: ADD_MESSAGE });
-
-export const updateNewMsg = (text = "") => ({
-    type: UPDATE_NEW_MESSAGE,
-    newText: text,
-});
+export const addMsg = (msg) => ({ type: ADD_MESSAGE, msg });
 
 export default DialogsReducer;

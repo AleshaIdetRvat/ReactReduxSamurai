@@ -1,7 +1,5 @@
 import React from "react";
-import MyPosts from "./MyPosts/MyPosts";
 import ProfHead from "./ProfHead/ProfHead";
-import mainImage from "./main_image.png";
 import "./Profile.scss";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
@@ -9,7 +7,13 @@ const Profile = (props) => {
     return (
         <div class="profile">
             <div class="profile__grid">
-                <ProfHead {...props.userProfileData} />
+                <ProfHead
+                    {...props.userProfileData}
+                    status={props.status}
+                    updateUserStatus={props.updateUserStatus}
+                    isMyProfile={props.isMyProfile}
+                    isAuth={props.isAuth}
+                />
                 <MyPostsContainer />
             </div>
         </div>

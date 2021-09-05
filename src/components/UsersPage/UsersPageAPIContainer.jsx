@@ -1,38 +1,18 @@
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
 import UsersPage from "./UsersPage";
-import { requestUsersData } from "../api/api";
+import { usersAPI } from "../api/api";
 
-class UsersPageClass extends React.Component {
-    getUsers(currentPage = this.props.currentPage, pageSize = this.props.pageSize) {
-        this.props.fetching();
-
-        requestUsersData(currentPage, pageSize).then((data) => {
-            this.props.endFetching();
-            this.props.setUsers(
-                data.items.map((user) => {
-                    return {
-                        id: user.id,
-                        fullname: user.name,
-                        location: {
-                            contry: "Russia",
-                            city: "Moscow",
-                        },
-                        status: user.status,
-                        followed: user.followed,
-                        avatar: user.photos.small,
-                    };
-                })
-            );
-        });
-    }
-
+class UsersPageAPIContainer extends React.Component {
     componentDidMount() {
-        this.getUsers();
+        this.props.getUsersThuckCreator(this.props.currentPage, this.props.pageSize);
     }
     selectPage = (pageNum) => {
         this.props.setCurrentPage(this.props.currentPage + pageNum);
-        this.getUsers(this.props.currentPage + pageNum);
+        this.props.getUsersThuckCreator(
+            this.props.currentPage + pageNum,
+            this.props.pageSize
+        );
     };
 
     render() {
@@ -42,6 +22,7 @@ class UsersPageClass extends React.Component {
                     <Preloader />
                 ) : (
                     <UsersPage
+                        isAuth={this.props.isAuth}
                         isFetching={this.props.isFetching}
                         currentPage={this.props.currentPage}
                         users={this.props.users}
@@ -51,6 +32,8 @@ class UsersPageClass extends React.Component {
                         selectPage={this.selectPage}
                         followingInProgress={this.props.followingInProgress}
                         followingInProgressState={this.props.followingInProgressState}
+                        unfollowThunkCreator={this.props.unfollowThunkCreator}
+                        followThunkCreator={this.props.followThunkCreator}
                     />
                 )}
             </>
@@ -58,4 +41,4 @@ class UsersPageClass extends React.Component {
     }
 }
 
-export default UsersPageClass;
+export default UsersPageAPIContainer;

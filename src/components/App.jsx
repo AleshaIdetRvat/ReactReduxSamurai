@@ -9,6 +9,7 @@ import News from "./News/News";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import UsersPageContainer from "./UsersPage/UsersPageContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
+import Login from "./Login/Login";
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path="/users" render={() => <UsersPageContainer />} />
 
                     <Route path="/news" render={() => <News />} />
+                    <Route path="/login" render={() => <Login />} />
                 </div>
             </div>
         </BrowserRouter>
