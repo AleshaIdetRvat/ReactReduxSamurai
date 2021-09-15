@@ -15,7 +15,7 @@ class ProfHead extends React.Component {
         inputValue: this.props.status,
     };
 
-    componentDidUpdate = (prevProps, prevStatus) => {
+    componentDidUpdate = (prevProps) => {
         if (this.props.status !== prevProps.status)
             this.setState({ inputValue: this.props.status });
     };

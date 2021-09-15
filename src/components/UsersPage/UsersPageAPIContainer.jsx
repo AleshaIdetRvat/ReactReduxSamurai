@@ -1,5 +1,4 @@
 import React from "react";
-import Preloader from "../common/Preloader/Preloader";
 import UsersPage from "./UsersPage";
 import { usersAPI } from "../api/api";
 
@@ -17,26 +16,20 @@ class UsersPageAPIContainer extends React.Component {
 
     render() {
         return (
-            <>
-                {this.props.isFetching ? (
-                    <Preloader />
-                ) : (
-                    <UsersPage
-                        isAuth={this.props.isAuth}
-                        isFetching={this.props.isFetching}
-                        currentPage={this.props.currentPage}
-                        users={this.props.users}
-                        totalUsersCount={this.props.totalUsersCount}
-                        follow={this.props.follow}
-                        unfollow={this.props.unfollow}
-                        selectPage={this.selectPage}
-                        followingInProgress={this.props.followingInProgress}
-                        followingInProgressState={this.props.followingInProgressState}
-                        unfollowThunkCreator={this.props.unfollowThunkCreator}
-                        followThunkCreator={this.props.followThunkCreator}
-                    />
-                )}
-            </>
+            <UsersPage
+                isAuth={this.props.isAuth}
+                isFetching={this.props.isFetching}
+                currentPage={this.props.currentPage}
+                users={this.props.users}
+                totalUsersCount={this.props.totalUsersCount}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
+                selectPage={this.selectPage}
+                followingInProgress={this.props.followingInProgress}
+                followingInProgressState={this.props.followingInProgressState}
+                unfollowThunkCreator={this.props.unfollowThunkCreator}
+                followThunkCreator={this.props.followThunkCreator}
+            />
         );
     }
 }

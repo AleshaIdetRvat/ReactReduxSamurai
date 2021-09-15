@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import "../style/app.scss";
@@ -10,8 +10,16 @@ import DialogsContainer from "./Dialogs/DialogsContainer";
 import UsersPageContainer from "./UsersPage/UsersPageContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import Login from "./Login/Login";
+import { getMyDataThunkCreator } from "../redux/reducers/AuthReducer";
+import { connect } from "react-redux";
+import { initializeApp } from "../redux/reducers/AppReducer";
+import Preloader from "./common/Preloader/Preloader";
 
-const App = () => {
+const App = (props) => {
+    useEffect(() => {
+        props.initializeApp();
+    }, []);
+    if (!props.initialized) return <Preloader />;
     return (
         <BrowserRouter>
             <div class="app">
@@ -31,4 +39,9 @@ const App = () => {
         </BrowserRouter>
     );
 };
-export default App;
+
+const mapStateToProps = (state) => ({
+    initialized: state.App.initialize,
+});
+
+export default connect(mapStateToProps, { initializeApp })(App);

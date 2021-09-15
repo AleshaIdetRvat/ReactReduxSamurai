@@ -1,5 +1,13 @@
 import axios from "axios";
 
+const axiosInstance = axios.create({
+    withCredentials: true,
+    baseURL: "https://social-network.samuraijs.com/api/1.0/",
+    headers: {
+        "API-KEY": "d184a441-2b4e-4887-89a3-478bc0bebff2",
+    },
+});
+
 export const authAPI = {
     requstMyData: () => {
         return new Promise((resolve, reject) => {
@@ -15,6 +23,7 @@ export const authAPI = {
                 .catch((reason) => reject(reason));
         });
     },
+
     login: (email, password, rememberMe) => {
         return new Promise((resolve, reject) => {
             axiosInstance
@@ -44,14 +53,6 @@ export const authAPI = {
         });
     },
 };
-
-const axiosInstance = axios.create({
-    withCredentials: true,
-    baseURL: "https://social-network.samuraijs.com/api/1.0/",
-    headers: {
-        "API-KEY": "d184a441-2b4e-4887-89a3-478bc0bebff2",
-    },
-});
 
 export const profileAPI = {
     requestProfileData: (userId) => {

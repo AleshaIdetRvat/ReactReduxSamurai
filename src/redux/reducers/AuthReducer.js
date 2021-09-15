@@ -24,7 +24,7 @@ export const setAuthUserData = (userId, email, login, isAuth = true) => ({
 });
 
 export const getMyDataThunkCreator = () => (dispatch) => {
-    authAPI
+    return authAPI
         .requstMyData()
         .then((data) => {
             console.log(data);

@@ -1,20 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
-import { getMyDataThunkCreator } from "../../redux/reducers/AuthReducer";
 
-class HeaderContainer extends Component {
-    componentDidMount() {
-        this.props.getMyDataThunkCreator();
-    }
-    render() {
-        return <Header {...this.props} />;
-    }
-}
+const HeaderContainer = (props) => {
+    return <Header {...props} />;
+};
 
 const mapStateToProps = (state) => ({
     isAuth: state.Auth.isAuth,
     login: state.Auth.login,
 });
 
-export default connect(mapStateToProps, { getMyDataThunkCreator })(HeaderContainer);
+export default connect(mapStateToProps, {})(HeaderContainer);

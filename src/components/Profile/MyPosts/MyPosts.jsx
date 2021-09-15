@@ -4,27 +4,61 @@ import { Field, reduxForm } from "redux-form";
 import Post from "./Post/Post";
 import { required, maxLenghtCreator } from "../../utils/validators/validators";
 import MyTextarea from "../../common/FormsControl/MyTextarea";
+import { Formik } from "formik";
+import * as yup from "yup";
 
-const maxLenght10 = maxLenghtCreator(10);
-const NewPostForm = ({ handleSubmit }) => {
+//const maxLenght10 = maxLenghtCreator(10);
+
+const NewPostForm = ({ onSubmitPost }) => {
+    const validationSchema = yup.object().shape({
+        newPost: yup.string().max(40),
+    });
+
     return (
-        <form onSubmit={handleSubmit} class="myposts__newpost">
-            <Field
-                name="newPost"
-                component={MyTextarea}
-                type="text"
-                placeholder="Your post"
-                validate={[required, maxLenght10]}
-                cols="30"
-                rows="2"
-            />
-            <div class="myposts__error"> </div>
-            <button>Add post</button>
-        </form>
+        <Formik
+            initialValues={{
+                newPost: "",
+            }}
+            validateOnBlur
+            onSubmit={(values) => {
+                onSubmitPost(values);
+            }}
+            validationSchema={validationSchema}
+        >
+            {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                isValid,
+                handleSubmit,
+                dirty,
+            }) => {
+                return (
+                    <form onSubmit={handleSubmit} class="myposts__newpost">
+                        <MyTextarea
+                            name="newPost"
+                            type="text"
+                            placeholder="Your post"
+                            cols="30"
+                            rows="2"
+                            value={values.newPost}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.newPost}
+                            touched={touched.newPost}
+                        />
+                        <div class="myposts__error"> </div>
+                        <button disabled={!isValid || !dirty} type="submit">
+                            Add post
+                        </button>
+                    </form>
+                );
+            }}
+        </Formik>
     );
 };
-
-const NewPostReduxForm = reduxForm({ form: "newPost" })(NewPostForm);
 
 const MyPosts = ({ addPost, profileData }) => {
     const postsElements = profileData.postsData.map((postData) => (
@@ -37,9 +71,8 @@ const MyPosts = ({ addPost, profileData }) => {
 
     return (
         <div class="myposts">
-            <NewPostReduxForm
-                onSubmit={(values) => {
-                    console.log(values.newPost);
+            <NewPostForm
+                onSubmitPost={(values) => {
                     addPost(values.newPost);
                 }}
             />

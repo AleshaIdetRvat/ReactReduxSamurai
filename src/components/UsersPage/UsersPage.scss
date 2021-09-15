@@ -13,6 +13,7 @@
     }
 
     &__body {
+        animation: cssload-opacity 0.3s ease;
         position: relative;
         display: grid;
         grid-template: auto / 1fr;

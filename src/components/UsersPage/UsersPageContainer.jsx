@@ -14,14 +14,22 @@ import { connect } from "react-redux";
 import UsersPageAPIContainer from "./UsersPageAPIContainer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import {
+    getTotalUsersCountSelector,
+    getUsersPageCurrentPage,
+    getUsersPageFetchingState,
+    getUsersPageFollowingInProgressStatee,
+    getUsersPageSizeSelector,
+    getUsersSelector,
+} from "../../redux/reducers/selectors/users-selectors";
 
 const mapStateToProps = (state) => ({
-    users: state.UsersPage.users,
-    pageSize: state.UsersPage.pageSize,
-    currentPage: state.UsersPage.currentPage,
-    totalUsersCount: state.UsersPage.totalUsersCount,
-    isFetching: state.UsersPage.isFetchingData,
-    followingInProgressState: state.UsersPage.followingInProgressState,
+    users: getUsersSelector(state),
+    pageSize: getUsersPageSizeSelector(state),
+    currentPage: getUsersPageCurrentPage(state),
+    totalUsersCount: getTotalUsersCountSelector(state),
+    isFetching: getUsersPageFetchingState(state),
+    followingInProgressState: getUsersPageFollowingInProgressStatee(state),
     isAuth: state.Auth.isAuth,
 });
 

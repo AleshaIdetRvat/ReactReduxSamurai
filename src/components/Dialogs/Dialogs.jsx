@@ -6,7 +6,7 @@ import { Field, reduxForm } from "redux-form";
 import MyTextarea from "../common/FormsControl/MyTextarea";
 import { required, maxLenghtCreator } from "../utils/validators/validators";
 import PropTypes from "prop-types";
-console.log(required);
+
 const maxLenght20 = maxLenghtCreator(20); //оалдыва ПРолиофыдлва
 
 const NewMsgForm = ({ onSubmit, handleSubmit }) => {
