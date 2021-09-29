@@ -1,14 +1,15 @@
-import React from "react";
-import "./Preloader.scss";
+import React from "react"
+import "./Preloader.scss"
 
-const Preloader = () => {
+const Preloader = ({ loading = true }) => {
+    if (!loading) return <></>
     return (
         <div class="preloader">
             <div class="preloader__wall">
                 <div class="preloader__spin-box"></div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Preloader;
+export default Preloader

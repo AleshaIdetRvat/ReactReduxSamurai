@@ -1,14 +1,15 @@
 /////  CSS LODER /////
 .preloader {
-    position: relative;
+    position: absolute;
+    z-index: 1000;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.747);
+    background-color: rgba(255, 255, 255, 0.847);
     transition: 0.3s;
-    animation: cssload-opacity 0.8s;
+    animation: cssload-opacity 0.3s;
     &__wall {
         position: relative;
         top: 0;

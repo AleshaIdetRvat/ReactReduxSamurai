@@ -1,14 +1,10 @@
-import React from "react";
-import "./Login.scss";
-import { Field, reduxForm } from "redux-form";
-import MyTextarea from "../common/FormsControl/MyTextarea";
-import { required, maxLenghtCreator } from "../utils/validators/validators";
-import { loginThunkCreator, logoutThunkCreator } from "../../redux/reducers/AuthReducer";
-import { connect } from "react-redux";
-import { Formik } from "formik";
-import * as yup from "yup";
-
-// const maxLenght30 = maxLenghtCreator(30);
+import React from "react"
+import "./Login.scss"
+import MyTextarea from "../common/FormsControl/MyTextarea"
+import { loginThunkCreator, logoutThunkCreator } from "../../redux/reducers/AuthReducer"
+import { connect } from "react-redux"
+import { Formik } from "formik"
+import * as yup from "yup"
 
 const LoginForm = ({ onSubmitLogin }) => {
     const validationSchema = yup.object().shape({
@@ -23,7 +19,7 @@ const LoginForm = ({ onSubmitLogin }) => {
             .min(5, "Too Short!")
             .max(20, "Too Long!")
             .required("Is required!"),
-    });
+    })
     return (
         <Formik
             initialValues={{
@@ -33,8 +29,8 @@ const LoginForm = ({ onSubmitLogin }) => {
             }}
             validateOnBlur
             onSubmit={(values) => {
-                console.log("onSubmit", values);
-                onSubmitLogin(values);
+                console.log("onSubmit", values)
+                onSubmitLogin(values)
             }}
             validationSchema={validationSchema}
         >
@@ -90,17 +86,17 @@ const LoginForm = ({ onSubmitLogin }) => {
                             Sign-in
                         </button>
                     </form>
-                );
+                )
             }}
         </Formik>
-    );
-};
+    )
+}
 
 const Login = (props) => {
     const onSubmitLogin = (values) => {
-        const { login, password, remeberMe } = values;
-        props.loginThunkCreator(login, password, remeberMe);
-    };
+        const { login, password, remeberMe } = values
+        props.loginThunkCreator(login, password, remeberMe)
+    }
     return (
         <>
             {!props.isAuth ? (
@@ -116,11 +112,11 @@ const Login = (props) => {
                 </div>
             )}
         </>
-    );
-};
+    )
+}
 
 const mapStateToProps = (state) => ({
     isAuth: state.Auth.isAuth,
-});
+})
 
-export default connect(mapStateToProps, { loginThunkCreator, logoutThunkCreator })(Login);
+export default connect(mapStateToProps, { loginThunkCreator, logoutThunkCreator })(Login)

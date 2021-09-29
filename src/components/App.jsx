@@ -1,25 +1,29 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import React, { useEffect } from "react"
+import { BrowserRouter, Route } from "react-router-dom"
 
-import "../style/app.scss";
+import "../style/app.scss"
 
-import HeaderContainer from "./Header/HeaderContainer";
-import Sidebar from "./Sidebar/Sidebar";
-import News from "./News/News";
-import DialogsContainer from "./Dialogs/DialogsContainer";
-import UsersPageContainer from "./UsersPage/UsersPageContainer";
-import ProfileContainer from "./Profile/ProfileContainer";
-import Login from "./Login/Login";
-import { getMyDataThunkCreator } from "../redux/reducers/AuthReducer";
-import { connect } from "react-redux";
-import { initializeApp } from "../redux/reducers/AppReducer";
-import Preloader from "./common/Preloader/Preloader";
+import HeaderContainer from "./Header/HeaderContainer"
+import Sidebar from "./Sidebar/Sidebar"
+import News from "./News/News"
+import DialogsContainer from "./Dialogs/DialogsContainer"
+import UsersPageContainer from "./UsersPage/UsersPageContainer"
+import ProfileContainer from "./Profile/ProfileContainer"
+import Login from "./Login/Login"
+
+import { connect } from "react-redux"
+import { initializeApp } from "../redux/reducers/AppReducer"
+import Preloader from "./common/Preloader/Preloader"
 
 const App = (props) => {
+    const { initialized, initializeApp } = props
+
     useEffect(() => {
-        props.initializeApp();
-    }, []);
-    if (!props.initialized) return <Preloader />;
+        initializeApp()
+    }, [initializeApp])
+
+    if (!initialized) return <Preloader />
+
     return (
         <BrowserRouter>
             <div class="app">
@@ -37,11 +41,11 @@ const App = (props) => {
                 </div>
             </div>
         </BrowserRouter>
-    );
-};
+    )
+}
 
 const mapStateToProps = (state) => ({
     initialized: state.App.initialize,
-});
+})
 
-export default connect(mapStateToProps, { initializeApp })(App);
+export default connect(mapStateToProps, { initializeApp })(App)

@@ -1,13 +1,13 @@
-import React from "react";
-import Person from "./Person/Person";
-import "./Dialogs.scss";
-import Message from "./Message/Message";
-import { Field, reduxForm } from "redux-form";
-import MyTextarea from "../common/FormsControl/MyTextarea";
-import { required, maxLenghtCreator } from "../utils/validators/validators";
-import PropTypes from "prop-types";
+import React from "react"
+import Person from "./Person/Person"
+import "./Dialogs.scss"
+import Message from "./Message/Message"
+import { Field, reduxForm } from "redux-form"
+import MyTextarea from "../common/FormsControl/MyTextarea"
+import { required, maxLenghtCreator } from "../utils/validators/validators"
+import PropTypes from "prop-types"
 
-const maxLenght20 = maxLenghtCreator(20); //оалдыва ПРолиофыдлва
+const maxLenght20 = maxLenghtCreator(20) //оалдыва ПРолиофыдлва
 
 const NewMsgForm = ({ onSubmit, handleSubmit }) => {
     return (
@@ -23,24 +23,24 @@ const NewMsgForm = ({ onSubmit, handleSubmit }) => {
             />
             <button class="send__btn">Send</button>
         </form>
-    );
-};
+    )
+}
 
-const NewMsgReduxForm = reduxForm({ form: "newMsg" })(NewMsgForm);
+const NewMsgReduxForm = reduxForm({ form: "newMsg" })(NewMsgForm)
 
 const Dialogs = ({ dialogsData, addMsg }) => {
     const onSubmitMsg = (newMsgFormData) => {
-        console.log(newMsgFormData.message);
-        addMsg(newMsgFormData.message);
-    };
+        console.log(newMsgFormData.message)
+        addMsg(newMsgFormData.message)
+    }
 
     let usersElements = dialogsData.usersData.map((user) => (
         <Person Name={user.name} personId={user.id} key={user.id} />
-    ));
+    ))
 
     let usersMsgElements = dialogsData.usersMsgData.map((msg) => (
         <Message Text={msg.text} myMsg={msg.myMsg} key={msg.id} />
-    ));
+    ))
 
     return (
         <div class="dialogs">
@@ -53,7 +53,11 @@ const Dialogs = ({ dialogsData, addMsg }) => {
                     <div class="dialogs__chat chat">
                         <div class="chat__body">
                             <div class="chat__messageS messageS">
-                                <div class="messageS__grid">{usersMsgElements}</div>
+                                <div class="messageS__grid">
+                                    {usersMsgElements}
+                                    {usersMsgElements}
+                                    {usersMsgElements}
+                                </div>
                             </div>
 
                             <div class="chat__send send">
@@ -64,8 +68,8 @@ const Dialogs = ({ dialogsData, addMsg }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 Dialogs.propTypes = {
     dialogsData: PropTypes.shape({
@@ -73,6 +77,6 @@ Dialogs.propTypes = {
         usersMsgData: PropTypes.array,
         innerInput: PropTypes.string,
     }).isRequired,
-};
+}
 
-export default Dialogs;
+export default Dialogs
