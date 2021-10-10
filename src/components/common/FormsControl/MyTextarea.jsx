@@ -1,5 +1,5 @@
-import React from "react";
-import "./MyTextarea.scss";
+import React from "react"
+import "./MyTextarea.scss"
 
 const MyTextarea = ({
     touched,
@@ -12,7 +12,7 @@ const MyTextarea = ({
     // console.log("meta.touched", meta.touched);
     // console.log("meta.error", meta.error);
     // console.log("hasError ", hasError);
-    const hasError = touched && error;
+    const hasError = touched && error
 
     return (
         <div class="my-textarea">
@@ -28,8 +28,8 @@ const MyTextarea = ({
                 </span>
             )}
         </div>
-    );
-};
+    )
+}
 
 // const MyTextarea = ({ isHorizontal = false, isInput = false, meta, input, ...props }) => {
 //     // console.log(meta);
@@ -60,4 +60,4 @@ const MyTextarea = ({
 //     );
 // };
 
-export default MyTextarea;
+export default MyTextarea

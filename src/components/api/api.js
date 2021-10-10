@@ -61,9 +61,13 @@ export const profileAPI = {
         formData.append("image", photo)
 
         try {
-            const response = await axiosInstance.put(`profile/photo`, formData, {
-                "Content-Type": "multipart/form-data",
-            })
+            const response = await axiosInstance.put(
+                `profile/photo`,
+                formData,
+                {
+                    "Content-Type": "multipart/form-data",
+                }
+            )
 
             if (response.data.resultCode === 0) {
                 return response.data.data.photos
@@ -81,8 +85,21 @@ export const profileAPI = {
     },
 
     requestProfileStatus: async (userId) => {
-        const response = await axiosInstance.get(`profile/status/${userId || 2}`)
+        const response = await axiosInstance.get(
+            `profile/status/${userId || 2}`
+        )
         return response.data
+    },
+
+    updateProfInfo: async (profInfo) => {
+        try {
+            const response = await axiosInstance.put("profile", profInfo)
+            if (response.data.resultCode !== 0) {
+                throw new Error("some error occured")
+            }
+        } catch (error) {
+            throw error
+        }
     },
 
     updateProfileStatus: (status) => {

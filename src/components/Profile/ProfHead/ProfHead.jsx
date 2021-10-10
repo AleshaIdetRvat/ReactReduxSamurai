@@ -1,32 +1,32 @@
-import React from "react";
-import vk from "./img/vk.svg";
-import youtube from "./img/youtube.svg";
-import facebook from "./img/facebook.svg";
-import twitter from "./img/twitter.svg";
-import github from "./img/github.svg";
-import instagram from "./img/instagram.svg";
+import React from "react"
+import vk from "./img/vk.svg"
+import youtube from "./img/youtube.svg"
+import facebook from "./img/facebook.svg"
+import twitter from "./img/twitter.svg"
+import github from "./img/github.svg"
+import instagram from "./img/instagram.svg"
 
-import "./ProfHead.scss";
+import "./ProfHead.scss"
 
 class ProfHead extends React.Component {
     // console.log(isMyProfile);
     state = {
         StatusEditMode: false,
         inputValue: this.props.status,
-    };
+    }
 
     componentDidUpdate = (prevProps) => {
         if (this.props.status !== prevProps.status)
-            this.setState({ inputValue: this.props.status });
-    };
+            this.setState({ inputValue: this.props.status })
+    }
 
     toggleStatusEditMode = () => {
-        this.setState({ StatusEditMode: !this.state.StatusEditMode });
-    };
+        this.setState({ StatusEditMode: !this.state.StatusEditMode })
+    }
 
     inputChangedHandler = (event) => {
-        this.setState({ inputValue: event.target.value });
-    };
+        this.setState({ inputValue: event.target.value })
+    }
 
     render() {
         const {
@@ -40,8 +40,7 @@ class ProfHead extends React.Component {
             isAuth,
             isMyProfile,
             updateUserStatus,
-        } = this.props;
-        console.log(this.props);
+        } = this.props
 
         return (
             <div class="prof-head">
@@ -62,11 +61,11 @@ class ProfHead extends React.Component {
                                         <input
                                             autoFocus
                                             onFocus={(event) => {
-                                                event.target.select();
+                                                event.target.select()
                                             }}
                                             onBlur={() => {
-                                                this.toggleStatusEditMode();
-                                                updateUserStatus(this.state.inputValue);
+                                                this.toggleStatusEditMode()
+                                                updateUserStatus(this.state.inputValue)
                                             }}
                                             value={this.state.inputValue}
                                             onChange={this.inputChangedHandler}
@@ -195,8 +194,8 @@ class ProfHead extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default ProfHead;
+export default ProfHead

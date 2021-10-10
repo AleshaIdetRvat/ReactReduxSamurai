@@ -1,7 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import { NavLink } from "react-router-dom"
 
-import "./Header.scss";
+import "./Header.scss"
 
 const Header = ({ isAuth, login }) => {
     return (
@@ -11,13 +11,13 @@ const Header = ({ isAuth, login }) => {
                     <div class="header__logo"></div>
                     <div className="header__login header-login">
                         <div className="header-login__body">
-                            {isAuth ? login : <NavLink to="/login">Login</NavLink>}
+                            <NavLink to="/login">{isAuth ? login : ""}</NavLink>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

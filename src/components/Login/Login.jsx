@@ -1,10 +1,11 @@
 import React from "react"
-import "./Login.scss"
 import MyTextarea from "../common/FormsControl/MyTextarea"
+import Checkbox from "../common/FormsControl/FormikCheckbox"
 import { loginThunkCreator, logoutThunkCreator } from "../../redux/reducers/AuthReducer"
 import { connect } from "react-redux"
 import { Formik } from "formik"
 import * as yup from "yup"
+import "./Login.scss"
 
 const LoginForm = ({ onSubmitLogin }) => {
     const validationSchema = yup.object().shape({
@@ -75,9 +76,10 @@ const LoginForm = ({ onSubmitLogin }) => {
                             />
                         </div>
                         <div class="login__remember-me">
-                            <input name="rememberMe" type="checkbox" />
+                            <Checkbox name="rememberMe" />
                             remember me
                         </div>
+
                         <button
                             disabled={!isValid || !dirty}
                             type="submit"
@@ -119,4 +121,7 @@ const mapStateToProps = (state) => ({
     isAuth: state.Auth.isAuth,
 })
 
-export default connect(mapStateToProps, { loginThunkCreator, logoutThunkCreator })(Login)
+export default connect(mapStateToProps, {
+    loginThunkCreator,
+    logoutThunkCreator,
+})(Login)

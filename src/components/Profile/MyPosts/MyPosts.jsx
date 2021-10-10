@@ -1,18 +1,14 @@
-import React from "react";
-import "./MyPosts.scss";
-import { Field, reduxForm } from "redux-form";
-import Post from "./Post/Post";
-import { required, maxLenghtCreator } from "../../utils/validators/validators";
-import MyTextarea from "../../common/FormsControl/MyTextarea";
-import { Formik } from "formik";
-import * as yup from "yup";
-
-//const maxLenght10 = maxLenghtCreator(10);
+import React from "react"
+import "./MyPosts.scss"
+import Post from "./Post/Post"
+import MyTextarea from "../../common/FormsControl/MyTextarea"
+import { Formik } from "formik"
+import * as yup from "yup"
 
 const NewPostForm = ({ onSubmitPost }) => {
     const validationSchema = yup.object().shape({
         newPost: yup.string().max(40),
-    });
+    })
 
     return (
         <Formik
@@ -21,7 +17,7 @@ const NewPostForm = ({ onSubmitPost }) => {
             }}
             validateOnBlur
             onSubmit={(values) => {
-                onSubmitPost(values);
+                onSubmitPost(values)
             }}
             validationSchema={validationSchema}
         >
@@ -54,11 +50,11 @@ const NewPostForm = ({ onSubmitPost }) => {
                             Add post
                         </button>
                     </form>
-                );
+                )
             }}
         </Formik>
-    );
-};
+    )
+}
 
 const MyPosts = ({ addPost, profileData }) => {
     const postsElements = profileData.postsData.map((postData) => (
@@ -67,13 +63,13 @@ const MyPosts = ({ addPost, profileData }) => {
             message={postData.message}
             key={postData.id}
         />
-    ));
+    ))
 
     return (
         <div class="myposts">
             <NewPostForm
                 onSubmitPost={(values) => {
-                    addPost(values.newPost);
+                    addPost(values.newPost)
                 }}
             />
 
@@ -81,7 +77,7 @@ const MyPosts = ({ addPost, profileData }) => {
                 <div class="myposts__grid">{postsElements}</div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default MyPosts;
+export default MyPosts

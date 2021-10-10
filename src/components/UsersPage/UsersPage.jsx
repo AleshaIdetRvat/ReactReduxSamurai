@@ -1,7 +1,7 @@
-import React from "react";
-import Preloader from "../common/Preloader/Preloader";
-import "./UsersPage.scss";
-import UsersPageItem from "./UsersPageItem/UsersPageItem";
+import React from "react"
+import Preloader from "../common/Preloader/Preloader"
+import "./UsersPage.scss"
+import UsersPageItem from "./UsersPageItem/UsersPageItem"
 
 const UsersPage = ({
     isFetching,
@@ -84,33 +84,31 @@ const UsersPage = ({
                     )}
                 </ul>
 
-                {!isFetching ? (
-                    <div class="users-page__body">
-                        {users.map((user) => (
-                            <UsersPageItem
-                                id={user.id}
-                                key={user.id}
-                                fullname={user.fullname}
-                                location={user.location}
-                                status={user.status}
-                                followed={user.followed}
-                                avatar={user.avatar}
-                                follow={() => followThunkCreator(user.id)}
-                                unfollow={() => unfollowThunkCreator(user.id)}
-                                followingInProgressState={() =>
-                                    followingInProgressState.some(
-                                        (userId) => userId === user.id
-                                    ) || !isAuth
-                                }
-                            />
-                        ))}
-                    </div>
-                ) : (
-                    <Preloader />
-                )}
+                <Preloader loading={isFetching} />
+
+                <div class="users-page__body">
+                    {users.map((user) => (
+                        <UsersPageItem
+                            id={user.id}
+                            key={user.id}
+                            fullname={user.fullname}
+                            location={user.location}
+                            status={user.status}
+                            followed={user.followed}
+                            avatar={user.avatar}
+                            follow={() => followThunkCreator(user.id)}
+                            unfollow={() => unfollowThunkCreator(user.id)}
+                            followingInProgressState={() =>
+                                followingInProgressState.some(
+                                    (userId) => userId === user.id
+                                ) || !isAuth
+                            }
+                        />
+                    ))}
+                </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default UsersPage;
+export default UsersPage

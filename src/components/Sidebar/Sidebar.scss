@@ -1,29 +1,87 @@
 .sidebar {
     grid-area: sidebar;
+    transition: 0.3s;
 
     &__body {
         height: 100%;
-        padding: 15px;
+
         background-color: rgba(189, 205, 235, 0.815);
     }
 
     &__grid {
         display: grid;
-        gap: 40px;
     }
 
     &__item {
-        box-sizing: content-box;
+        //box-sizing: content-box;
+        display: block;
+        position: relative;
+        padding: 10px 15px;
+        margin: 3px 0px;
+        // margin-left: 0px;
 
-        & a {
-            color: rgb(41, 41, 41);
-            font-weight: 700;
-            transition: all 0.1s ease;
-            border-bottom: 0px solid rgb(240, 188, 140);
-
-            &:hover {
+        &:first-child {
+            margin-top: 0px;
+            &::before {
+                border-radius: 0px 0px 3px 3px;
+            }
+        }
+        &.selected {
+            span {
                 color: rgb(240, 188, 140);
             }
+
+            &::before {
+                opacity: 1;
+                width: 100%;
+                background-color: #474747;
+
+                top: 0%;
+                bottom: 0%;
+            }
+        }
+
+        &::before {
+            transition: 0.2s ease;
+            content: "";
+            display: block;
+            border-radius: 3px;
+            opacity: 0.5;
+            width: 20%;
+            background-color: #4d4d4d00;
+
+            position: absolute;
+            z-index: 5;
+            left: 0px;
+            top: 30%;
+            bottom: 30%;
+        }
+
+        &:hover {
+            span {
+                color: rgb(255, 255, 255);
+            }
+
+            &::before {
+                opacity: 1;
+                width: 100%;
+                background-color: #4d4d4d;
+
+                top: 0%;
+                bottom: 0%;
+            }
+        }
+
+        span {
+            position: relative;
+            z-index: 10;
+            height: min-content;
+            display: block;
+            padding: 4px;
+            transition: 0.2s ease;
+
+            color: rgb(41, 41, 41);
+            font-weight: 700;
         }
     }
 }

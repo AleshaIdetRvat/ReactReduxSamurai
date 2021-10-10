@@ -40,18 +40,33 @@
             transform: translate(0, 2px);
         }
     }
-    .login-btn {
-        padding: 5px 10px;
-        border-radius: 8px;
-        font-size: 20px;
-        background-color: rgb(196, 227, 255);
-        transition: 0.1s;
+}
+
+.login-btn {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: rgb(196, 227, 255);
+    transition: 0.15s ease;
+
+    box-shadow: 0px 0px 0px 0px #43434300;
+    &:hover {
+        box-shadow: 0px 0px 0px 3px #434343;
+    }
+    &:active {
+        opacity: 0.8;
+        transform: scale(90%);
+    }
+
+    &:disabled {
         &:hover {
-            opacity: 0.8;
-        }
-        &:active {
-            opacity: 0.6;
-            transform: scale(90%);
+            box-shadow: 0px 0px 0px 0px #434343;
         }
     }
+}
+
+.logout {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
 }

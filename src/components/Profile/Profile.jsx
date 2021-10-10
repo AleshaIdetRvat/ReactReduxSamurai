@@ -1,21 +1,23 @@
 import React from "react"
-import ProfHead from "./ProfHead/ProfHead"
 import "./Profile.scss"
 import MyPostsContainer from "./MyPosts/MyPostsContainer"
-import ProfHeadProfHeadFuncComponent from "./ProfHead/ProfHeadFuncComponent"
+import ProfHeadFuncComponent from "./ProfHead/ProfHeadFuncComponent"
 
 const Profile = (props) => {
+    console.log("____PROFILE RENDER")
     return (
         <div class="profile">
             <div class="profile__grid">
-                <ProfHeadProfHeadFuncComponent
+                <ProfHeadFuncComponent
                     {...props.userProfileData}
                     status={props.status}
                     updateUserStatus={props.updateUserStatus}
+                    updateAvatar={props.updateAvatar}
                     isMyProfile={props.isMyProfile}
                     isAuth={props.isAuth}
+                    toggleSetFetching={props.toggleSetFetching}
                 />
-                <MyPostsContainer />
+                {/* <MyPostsContainer /> */}
             </div>
         </div>
     )
