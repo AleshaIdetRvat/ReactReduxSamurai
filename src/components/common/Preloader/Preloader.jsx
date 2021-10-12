@@ -1,12 +1,28 @@
 import React from "react"
+import { usePrevious } from "../../../hooks/previous.hook"
 import "./Preloader.scss"
 
-const Preloader = ({ loading = true }) => {
-    if (!loading) return <></>
+const Preloader = ({ loading }) => {
+    const [closing, setClosing] = React.useState(true)
+
+    const prevLoading = usePrevious(loading)
+
+    React.useEffect(() => {
+        if (prevLoading && !loading) {
+            setClosing(true)
+
+            setTimeout(() => {
+                setClosing(false)
+                console.log("closing end")
+            }, 2000)
+        }
+    }, [loading])
+
+    if (!loading && !closing) return null
     return (
-        <div class="preloader">
-            <div class="preloader__wall">
-                <div class="preloader__spin-box"></div>
+        <div className={`preloader ${closing && "--closing"}`}>
+            <div className="preloader__wall">
+                <div className="preloader__spin-box"></div>
             </div>
         </div>
     )

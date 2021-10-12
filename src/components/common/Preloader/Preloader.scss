@@ -7,11 +7,20 @@
     left: 0;
     right: 0;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.847);
+    background-color: rgb(255, 255, 255);
     transition: 0.3s;
-    animation: cssload-opacity 0.3s;
+    animation: starting-anim 0.5s;
+
+    &.--closing {
+        animation: closing-anim ease 2s forwards;
+
+        &__spin-box {
+            animation: rotate-animation ease infinite 1s, closing-anim ease 2s forwards;
+        }
+    }
+
     &__wall {
-        position: relative;
+        position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
@@ -25,44 +34,51 @@
         left: 0;
         right: 0;
         margin: auto;
-        transform: translateY(500px);
 
         width: 70px;
         height: 70px;
-        border-radius: 100%;
-        box-shadow: 70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223),
-            -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223);
-        animation: cssload-spin ease infinite 4.6s;
+
+        border: 10px solid #434343;
+        border-right: 10px solid transparent;
+        border-radius: 50%;
+
+        animation: rotate-animation ease infinite 1s, starting-anim linear 1s forwards;
     }
 }
 
-@keyframes cssload-opacity {
-    0% {
+@keyframes closing-anim {
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        //z-index: -1;
         opacity: 0;
     }
+}
+
+@keyframes starting-anim {
+    0% {
+        z-index: 1000;
+        opacity: 0;
+    }
+
     100% {
         opacity: 1;
     }
 }
 
-@keyframes cssload-spin {
-    0%,
-    100% {
-        box-shadow: 70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223),
-            -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223);
-    }
-    25% {
-        box-shadow: -70px 70px rgb(223, 223, 223), -70px -70px rgb(79, 77, 73),
-            70px -70px rgb(223, 223, 223), 70px 70px rgb(79, 77, 73);
+@keyframes rotate-animation {
+    0% {
+        opacity: 0.8;
+        transform: rotate(0deg) scale(50%);
     }
     50% {
-        box-shadow: -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223),
-            70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223);
+        opacity: 1;
+        transform: rotate(180deg) scale(100%);
     }
-    75% {
-        box-shadow: 70px -70px #dfdfdf, 70px 70px #4f4d49, -70px 70px #dfdfdf,
-            -70px -70px #4f4d49;
+    100% {
+        opacity: 0.8;
+        transform: rotate(360deg) scale(50%);
     }
 }
-
-///////////////////////////////
