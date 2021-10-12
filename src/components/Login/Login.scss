@@ -1,10 +1,18 @@
 .login {
     padding-top: 30px;
     width: 100%;
-    h1 {
+
+    &__error-label {
+        padding-top: 20px;
+        font-size: 20px;
+        text-align: center;
+        color: #cf4c4c;
+        font-weight: bold;
+    }
+    &__title {
         font-size: 30px;
         text-align: center;
-        margin: 10px 0;
+        margin: 20px 0;
     }
     &__form {
         display: flex;

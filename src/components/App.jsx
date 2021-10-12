@@ -14,8 +14,10 @@ import { initializeApp } from "../redux/reducers/AppReducer"
 import "../style/app.scss"
 
 const App = (props) => {
-    const { initialized, initializeApp, isAuth } = props
+    const { initialized, initializeApp, isAuth, isFetching } = props
 
+    const isShowPreloader = !initialized || isFetching
+    console.log("isShowPreloader", isShowPreloader)
     useEffect(() => {
         initializeApp()
     }, [initializeApp])
@@ -23,14 +25,14 @@ const App = (props) => {
     return (
         <BrowserRouter>
             <div class="app">
-                <Preloader loading={!initialized} />
+                <Preloader loading={isShowPreloader} />
                 <HeaderContainer />
                 {isAuth && <Sidebar />}
                 <div class="app__content">
                     <Switch>
                         <Route path="/login" render={() => <Login />} />
 
-                        {isAuth && (
+                        {isAuth ? (
                             <>
                                 <Route
                                     path="/profile/:userId?"
@@ -51,9 +53,9 @@ const App = (props) => {
 
                                 <Redirect to="/profile" />
                             </>
+                        ) : (
+                            <Redirect to="/login" />
                         )}
-
-                        <Redirect to="/login" />
                     </Switch>
                 </div>
             </div>
@@ -64,6 +66,7 @@ const App = (props) => {
 const mapStateToProps = (state) => ({
     initialized: state.App.initialize,
     isAuth: state.Auth.isAuth,
+    isFetching: state.Auth.isFetching,
 })
 
 export default connect(mapStateToProps, { initializeApp })(App)

@@ -2,6 +2,7 @@ import { authAPI, securAPI } from "../../components/api/api"
 const SET_USER_DATA = "authreducer/SET_USER_DATA"
 const SET_CAPTCHA = "authreducer/SET_CAPTCHA"
 const SET_ERROR = "authreducer/SET_ERROR"
+const SET_FETCHING = "authreducer/SET_FETCHING"
 
 const defaultState = {
     userId: null,
@@ -10,6 +11,7 @@ const defaultState = {
     isAuth: false,
     captcha: null,
     authError: null,
+    isFetching: false,
 }
 
 const AuthReducer = (state = defaultState, action) => {
@@ -20,10 +22,17 @@ const AuthReducer = (state = defaultState, action) => {
             return { ...state, captcha: action.url }
         case SET_ERROR:
             return { ...state, authError: action.errorMsg }
+        case SET_FETCHING:
+            return { ...state, isFetching: action.flag }
         default:
             return state
     }
 }
+
+const setFetching = (flag) => ({
+    type: SET_FETCHING,
+    flag,
+})
 
 const setCaptcha = (url) => ({
     type: SET_CAPTCHA,
@@ -56,7 +65,10 @@ export const getMyDataThunkCreator = () => async (dispatch) => {
 
 export const loginThunkCreator =
     (email, password, rememberMe, captcha) => async (dispatch) => {
+        dispatch(setFetching(true))
+
         dispatch(setError(null))
+
         try {
             await authAPI.login(email, password, rememberMe, captcha)
 
@@ -68,6 +80,8 @@ export const loginThunkCreator =
                 dispatch(getCaptcha())
             }
         }
+
+        dispatch(setFetching(false))
     }
 
 export const logoutThunkCreator = () => (dispatch) => {

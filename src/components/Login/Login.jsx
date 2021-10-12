@@ -7,7 +7,7 @@ import { Formik } from "formik"
 import * as yup from "yup"
 import "./Login.scss"
 
-const LoginForm = ({ onSubmitLogin, captchaUrl, authError }) => {
+const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
     const validationSchema = yup.object().shape({
         login: yup
             .string()
@@ -84,14 +84,16 @@ const LoginForm = ({ onSubmitLogin, captchaUrl, authError }) => {
 
                         {captchaUrl && (
                             <>
-                                <div>
-                                    <img src={captchaUrl} alt="captcha" />
+                                <div class="login__captcha">
+                                    <img
+                                        class="login__captcha-img"
+                                        src={captchaUrl}
+                                        alt="captcha"
+                                    />
                                 </div>
-                                <div class="login__input-password">
+                                <div class="login__input-password input-captcha">
                                     <MyTextarea
                                         onBlur={handleBlur}
-                                        error={authError}
-                                        touched={touched.captcha}
                                         value={values.captcha}
                                         onChange={handleChange}
                                         name="captcha"
@@ -101,7 +103,6 @@ const LoginForm = ({ onSubmitLogin, captchaUrl, authError }) => {
                                     />
                                 </div>
                             </>
-                            // authError
                         )}
 
                         <button
@@ -130,12 +131,9 @@ const Login = (props) => {
             {!isAuth ? (
                 <>
                     <div class="login">
-                        <h1>Login</h1>
-                        <LoginForm
-                            authError={authError}
-                            captchaUrl={captcha}
-                            onSubmitLogin={onSubmitLogin}
-                        />
+                        <h1 class="login__title">Login</h1>
+                        <LoginForm captchaUrl={captcha} onSubmitLogin={onSubmitLogin} />
+                        <div className="login__error-label">{authError}</div>
                     </div>
                 </>
             ) : (
