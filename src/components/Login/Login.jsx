@@ -7,7 +7,7 @@ import { Formik } from "formik"
 import * as yup from "yup"
 import "./Login.scss"
 
-const LoginForm = ({ onSubmitLogin }) => {
+const LoginForm = ({ onSubmitLogin, captchaUrl, authError }) => {
     const validationSchema = yup.object().shape({
         login: yup
             .string()
@@ -20,6 +20,7 @@ const LoginForm = ({ onSubmitLogin }) => {
             .min(5, "Too Short!")
             .max(20, "Too Long!")
             .required("Is required!"),
+        captcha: yup.string(),
     })
     return (
         <Formik
@@ -27,6 +28,7 @@ const LoginForm = ({ onSubmitLogin }) => {
                 login: "",
                 password: "",
                 remeberMe: false,
+                captcha: "",
             }}
             validateOnBlur
             onSubmit={(values) => {
@@ -80,6 +82,28 @@ const LoginForm = ({ onSubmitLogin }) => {
                             remember me
                         </div>
 
+                        {captchaUrl && (
+                            <>
+                                <div>
+                                    <img src={captchaUrl} alt="captcha" />
+                                </div>
+                                <div class="login__input-password">
+                                    <MyTextarea
+                                        onBlur={handleBlur}
+                                        error={authError}
+                                        touched={touched.captcha}
+                                        value={values.captcha}
+                                        onChange={handleChange}
+                                        name="captcha"
+                                        placeholder="captcha"
+                                        isHorizontal={true}
+                                        isInput={true}
+                                    />
+                                </div>
+                            </>
+                            // authError
+                        )}
+
                         <button
                             disabled={!isValid || !dirty}
                             type="submit"
@@ -95,20 +119,28 @@ const LoginForm = ({ onSubmitLogin }) => {
 }
 
 const Login = (props) => {
+    const { captcha, isAuth, authError, loginThunkCreator, logoutThunkCreator } = props
+
     const onSubmitLogin = (values) => {
-        const { login, password, remeberMe } = values
-        props.loginThunkCreator(login, password, remeberMe)
+        const { login, password, remeberMe, captcha } = values
+        loginThunkCreator(login, password, remeberMe, captcha)
     }
     return (
         <>
-            {!props.isAuth ? (
-                <div class="login">
-                    <h1>Login</h1>
-                    <LoginForm onSubmitLogin={onSubmitLogin} />
-                </div>
+            {!isAuth ? (
+                <>
+                    <div class="login">
+                        <h1>Login</h1>
+                        <LoginForm
+                            authError={authError}
+                            captchaUrl={captcha}
+                            onSubmitLogin={onSubmitLogin}
+                        />
+                    </div>
+                </>
             ) : (
                 <div class="logout">
-                    <button class="login-btn" onClick={props.logoutThunkCreator}>
+                    <button class="login-btn" onClick={logoutThunkCreator}>
                         Logout
                     </button>
                 </div>
@@ -119,6 +151,8 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => ({
     isAuth: state.Auth.isAuth,
+    authError: state.Auth.authError,
+    captcha: state.Auth.captcha,
 })
 
 export default connect(mapStateToProps, {

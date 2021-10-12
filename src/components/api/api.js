@@ -8,6 +8,17 @@ const axiosInstance = axios.create({
     },
 })
 
+export const securAPI = {
+    getCaptcha: async () => {
+        try {
+            const res = await axiosInstance.get("security/get-captcha-url")
+            return res.data.url
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+}
+
 export const authAPI = {
     requstMyData: () => {
         return new Promise((resolve, reject) => {
@@ -24,15 +35,15 @@ export const authAPI = {
         })
     },
 
-    login: (email, password, rememberMe) => {
+    login: (email, password, rememberMe, captcha = null) => {
         return new Promise((resolve, reject) => {
             axiosInstance
-                .post(`auth/login`, { email, password, rememberMe })
+                .post(`auth/login`, { email, password, rememberMe, captcha })
                 .then((response) => {
-                    if (!response.data.resultCode) {
+                    if (response.data.resultCode === 0) {
                         resolve(response.data.data)
                     } else {
-                        reject(response.data.messages[0])
+                        reject([response.data.resultCode, response.data.messages[0]])
                     }
                 })
                 .catch((reason) => reject(reason))
@@ -61,13 +72,9 @@ export const profileAPI = {
         formData.append("image", photo)
 
         try {
-            const response = await axiosInstance.put(
-                `profile/photo`,
-                formData,
-                {
-                    "Content-Type": "multipart/form-data",
-                }
-            )
+            const response = await axiosInstance.put(`profile/photo`, formData, {
+                "Content-Type": "multipart/form-data",
+            })
 
             if (response.data.resultCode === 0) {
                 return response.data.data.photos
@@ -85,9 +92,7 @@ export const profileAPI = {
     },
 
     requestProfileStatus: async (userId) => {
-        const response = await axiosInstance.get(
-            `profile/status/${userId || 2}`
-        )
+        const response = await axiosInstance.get(`profile/status/${userId || 2}`)
         return response.data
     },
 
