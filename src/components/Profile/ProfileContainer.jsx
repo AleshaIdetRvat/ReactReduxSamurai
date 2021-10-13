@@ -30,10 +30,10 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        console.log("PROFILE CONTAINER RENDER: ", this.props.Profile)
         return (
             <>
-                {this.props.Profile.isFetching ? <Preloader /> : ""}
+                <Preloader loading={this.props.Profile.isFetching} />
+
                 <Profile
                     toggleSetFetching={this.props.toggleSetFetching}
                     updateAvatar={this.props.updateAvatarTC}
@@ -41,9 +41,7 @@ class ProfileContainer extends React.Component {
                     userProfileData={this.props.Profile.userProfileData}
                     status={this.props.Profile.status}
                     isAuth={this.props.isAuth}
-                    isMyProfile={
-                        this.props.myId == this.props.match.params.userId
-                    }
+                    isMyProfile={this.props.myId == this.props.match.params.userId}
                 />
             </>
         )
@@ -59,9 +57,7 @@ class ProfileContainer extends React.Component {
                         userProfileData={this.props.Profile.userProfileData}
                         status={this.props.Profile.status}
                         isAuth={this.props.isAuth}
-                        isMyProfile={
-                            this.props.myId == this.props.match.params.userId
-                        }
+                        isMyProfile={this.props.myId == this.props.match.params.userId}
                     />
                 )}
             </>

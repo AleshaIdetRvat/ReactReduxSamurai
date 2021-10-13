@@ -7,15 +7,16 @@
     left: 0;
     right: 0;
     height: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 1);
     transition: 0.3s;
-    animation: starting-anim 0.5s;
+    opacity: 0.8;
+    animation: starting-anim 1s;
 
     &.--closing {
         animation: closing-anim ease 2s forwards;
 
         &__spin-box {
-            animation: rotate-animation ease infinite 1s, closing-anim ease 2s forwards;
+            animation: rotate-animation ease infinite 1s, closing-anim ease 1s forwards;
         }
     }
 
@@ -59,7 +60,6 @@
 
 @keyframes starting-anim {
     0% {
-        z-index: 1000;
         opacity: 0;
     }
 

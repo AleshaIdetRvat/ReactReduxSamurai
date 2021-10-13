@@ -85,6 +85,7 @@ export const loginThunkCreator =
     }
 
 export const logoutThunkCreator = () => (dispatch) => {
+    dispatch(setFetching(true))
     authAPI
         .logout()
         .then((data) => {
@@ -93,6 +94,9 @@ export const logoutThunkCreator = () => (dispatch) => {
         })
         .catch((reason) => {
             console.error(reason)
+        })
+        .finally(() => {
+            dispatch(setFetching(false))
         })
 }
 

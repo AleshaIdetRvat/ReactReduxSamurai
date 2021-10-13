@@ -13,11 +13,17 @@ import Preloader from "./common/Preloader/Preloader"
 import { initializeApp } from "../redux/reducers/AppReducer"
 import "../style/app.scss"
 
+function showMeThis() {
+    return this
+}
+
+console.log(showMeThis)
+
 const App = (props) => {
     const { initialized, initializeApp, isAuth, isFetching } = props
 
     const isShowPreloader = !initialized || isFetching
-    console.log("isShowPreloader", isShowPreloader)
+
     useEffect(() => {
         initializeApp()
     }, [initializeApp])
@@ -26,7 +32,7 @@ const App = (props) => {
         <BrowserRouter>
             <div class="app">
                 <Preloader loading={isShowPreloader} />
-                <HeaderContainer />
+                <HeaderContainer className={initializeApp && "started-header"} />
                 {isAuth && <Sidebar />}
                 <div class="app__content">
                     <Switch>

@@ -134,6 +134,10 @@ const Login = (props) => {
                         <h1 class="login__title">Login</h1>
                         <LoginForm captchaUrl={captcha} onSubmitLogin={onSubmitLogin} />
                         <div className="login__error-label">{authError}</div>
+                        <div className="login__balls login-balls">
+                            <div className="login-balls__ball1" />
+                            <div className="login-balls__ball2" />
+                        </div>
                     </div>
                 </>
             ) : (

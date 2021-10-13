@@ -14,7 +14,7 @@ const Preloader = ({ loading }) => {
             setTimeout(() => {
                 setClosing(false)
                 console.log("closing end")
-            }, 2000)
+            }, 1000)
         }
     }, [loading])
 
