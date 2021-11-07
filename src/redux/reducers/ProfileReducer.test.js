@@ -1,4 +1,8 @@
-import { addPostActionCreator, ProfileReducer, deletePost } from "./ProfileReducer"
+import {
+    addPostActionCreator,
+    ProfileReducer,
+    deletePost,
+} from "./ProfileReducer"
 
 const defaultState = {
     postsData: [{ id: 2 }, { id: 1 }, { id: 3 }],
@@ -43,9 +47,6 @@ it("new post id should be valid", () => {
     }
 
     const postsIds = newState.postsData.map((post) => Number(post.id))
-    // console.log("postsIds", postsIds)
-    // console.log("postsValidIds", postsValidIds)
 
-    // 3) expectation
     expect(JSON.stringify(postsIds)).toBe(JSON.stringify(postsValidIds))
 })

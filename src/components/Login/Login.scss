@@ -82,7 +82,6 @@
 }
 
 .logout {
-    margin: 20px;
     display: flex;
     justify-content: flex-start;
 }
@@ -99,13 +98,13 @@
 
     &__ball1,
     &__ball2 {
-        // opacity: 0.5;
+        transform: scale(0%);
         position: absolute;
         bottom: 0;
         z-index: 10;
 
-        width: 400px;
-        height: 400px;
+        width: 40vw;
+        height: 40vw;
         display: flex;
         align-items: center;
         justify-content: center;

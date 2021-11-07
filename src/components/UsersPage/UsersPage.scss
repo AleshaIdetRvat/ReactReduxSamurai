@@ -1,5 +1,4 @@
 .users-page {
-    animation: cssload-opacity 0.6s ease;
     height: 100%;
     min-height: 650px;
     padding: 0 10px 20px 10px;
@@ -13,7 +12,6 @@
     }
 
     &__body {
-        animation: cssload-opacity 0.3s ease;
         position: relative;
         display: grid;
         grid-template: auto / 1fr;
@@ -74,49 +72,3 @@
         }
     }
 }
-
-@keyframes cssload-opacity {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-/////  CSS LODER /////
-// .cssload-spin-box {
-//     position: absolute;
-//     margin: auto;
-//     left: 0;
-//     top: -400px;
-//     bottom: 0;
-//     right: 0;
-//     width: 70px;
-//     height: 70px;
-//     border-radius: 100%;
-//     box-shadow: 70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223),
-//         -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223);
-//     animation: cssload-spin ease infinite 4.6s;
-// }
-
-// @keyframes cssload-spin {
-//     0%,
-//     100% {
-//         box-shadow: 70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223),
-//             -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223);
-//     }
-//     25% {
-//         box-shadow: -70px 70px rgb(223, 223, 223), -70px -70px rgb(79, 77, 73),
-//             70px -70px rgb(223, 223, 223), 70px 70px rgb(79, 77, 73);
-//     }
-//     50% {
-//         box-shadow: -70px -70px rgb(79, 77, 73), 70px -70px rgb(223, 223, 223),
-//             70px 70px rgb(79, 77, 73), -70px 70px rgb(223, 223, 223);
-//     }
-//     75% {
-//         box-shadow: 70px -70px #dfdfdf, 70px 70px #4f4d49, -70px 70px #dfdfdf,
-//             -70px -70px #4f4d49;
-//     }
-// }
-
-///////////////////////////////

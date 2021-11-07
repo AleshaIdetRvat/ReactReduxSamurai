@@ -1,31 +1,23 @@
 import React from "react"
-import { usePrevious } from "../../../hooks/previous.hook"
+import { CSSTransition } from "react-transition-group"
 import "./Preloader.scss"
+// import { usePrevious } from "../../../hooks/previous.hook"
 
 const Preloader = ({ loading }) => {
-    const [closing, setClosing] = React.useState(true)
-
-    const prevLoading = usePrevious(loading)
-
-    React.useEffect(() => {
-        if (prevLoading && !loading) {
-            setClosing(true)
-
-            setTimeout(() => {
-                setClosing(false)
-                console.log("closing end")
-            }, 1000)
-        }
-    }, [loading])
-
-    if (!loading && !closing) return null
     return (
-        <div className={`preloader ${closing && "--closing"}`}>
-            <div className="preloader__wall">
-                <div className="preloader__spin-box"></div>
+        <CSSTransition
+            in={loading}
+            timeout={500}
+            classNames='preloader'
+            mountOnEnter
+            unmountOnExit
+        >
+            <div className='preloader'>
+                <div className='preloader__wall'>
+                    <div className='preloader__spin-box' />
+                </div>
             </div>
-        </div>
+        </CSSTransition>
     )
 }
-
 export default Preloader

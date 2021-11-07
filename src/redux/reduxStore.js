@@ -5,22 +5,25 @@ import ProfileReducer from "./reducers/ProfileReducer"
 import SidebarReducer from "./reducers/SidebarReducer"
 import UsersPageReducer from "./reducers/UsersPageReducer"
 import thunk from "redux-thunk"
-import { reducer as formReducer } from "redux-form"
 import AppReducer from "./reducers/AppReducer"
+import NewsReducer from "./reducers/NewsReducer"
 
 const reducerS = combineReducers({
-    Messages: DialogsReducer, ///
-    Profile: ProfileReducer, ///  Можно воспринимать как STATE
-    Sidebar: SidebarReducer, ///
+    Messages: DialogsReducer,
+    Profile: ProfileReducer,
+    Sidebar: SidebarReducer,
     UsersPage: UsersPageReducer,
     Auth: AuthReducer,
-    form: formReducer,
     App: AppReducer,
+    News: NewsReducer,
 })
 
 const composeExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const reduxStore = createStore(reducerS, composeExtension(applyMiddleware(thunk)))
+const reduxStore = createStore(
+    reducerS,
+    composeExtension(applyMiddleware(thunk))
+)
 
 window.reduxStore = reduxStore
 

@@ -41,25 +41,10 @@ class ProfileContainer extends React.Component {
                     userProfileData={this.props.Profile.userProfileData}
                     status={this.props.Profile.status}
                     isAuth={this.props.isAuth}
-                    isMyProfile={this.props.myId == this.props.match.params.userId}
+                    isMyProfile={
+                        this.props.myId == this.props.match.params.userId
+                    }
                 />
-            </>
-        )
-        return (
-            <>
-                {this.props.Profile.isFetching ? (
-                    <Preloader />
-                ) : (
-                    <Profile
-                        toggleSetFetching={this.props.toggleSetFetching}
-                        updateAvatar={this.props.updateAvatarTC}
-                        updateUserStatus={this.props.updateUserStatus}
-                        userProfileData={this.props.Profile.userProfileData}
-                        status={this.props.Profile.status}
-                        isAuth={this.props.isAuth}
-                        isMyProfile={this.props.myId == this.props.match.params.userId}
-                    />
-                )}
             </>
         )
     }

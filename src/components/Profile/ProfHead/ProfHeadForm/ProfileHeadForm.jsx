@@ -33,7 +33,7 @@ const FormContacts = ({
                                 link={contacts[key]}
                                 name={key}
                             >
-                                <div class="prof-form-item__field">
+                                <div class='prof-form-item__field'>
                                     <MyTextarea
                                         value={values.contacts[key]}
                                         onChange={handleChange}
@@ -72,9 +72,7 @@ const ProfileHeadForm = (props) => {
             await updateProfInfo(profInfo, userId)
 
             onSave()
-        } catch (error) {
-            console.log("SUBMIT CATCH ERROR", error)
-        }
+        } catch (error) {}
     }
 
     const URL =
@@ -144,52 +142,52 @@ const ProfileHeadForm = (props) => {
                 handleSubmit,
             }) => {
                 return (
-                    <form onSubmit={handleSubmit} class="profile-head-form">
-                        <div class="profile-head-form__fullname">
+                    <form onSubmit={handleSubmit} class='profile-head-form'>
+                        <div class='profile-head-form__fullname'>
                             <MyTextarea
                                 error={errors.FullName}
                                 touched={touched.FullName}
                                 value={values.FullName}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                name="FullName"
-                                placeholder="Fullname"
+                                name='FullName'
+                                placeholder='Fullname'
                                 isInput={true}
                             />
                         </div>
 
-                        <div class="profile-head-form__item prof-form-item">
-                            <b class="prof-form-item__title">About me:</b>
-                            <div class="prof-form-item__field">
+                        <div class='profile-head-form__item prof-form-item'>
+                            <b class='prof-form-item__title'>About me:</b>
+                            <div class='prof-form-item__field'>
                                 <MyTextarea
                                     value={values.AboutMe}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    name="AboutMe"
-                                    placeholder="About yourself"
+                                    name='AboutMe'
+                                    placeholder='About yourself'
                                 />
                             </div>
                         </div>
 
-                        <div class="profile-head-form__item prof-form-item">
-                            <b class="prof-form-item__title">
+                        <div class='profile-head-form__item prof-form-item'>
+                            <b class='prof-form-item__title'>
                                 Are you looking for a job now?
                             </b>
 
                             <Checkbox
-                                className="prof-form-item__check-box"
-                                name="lookingForAJob"
+                                className='prof-form-item__check-box'
+                                name='lookingForAJob'
                             />
                         </div>
-                        <div class="profile-head-form__item prof-form-item">
-                            <b class="prof-form-item__title">About work: </b>
-                            <div class="prof-form-item__field">
+                        <div class='profile-head-form__item prof-form-item'>
+                            <b class='prof-form-item__title'>About work: </b>
+                            <div class='prof-form-item__field'>
                                 <MyTextarea
                                     value={values.LookingForAJobDescription}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    name="LookingForAJobDescription"
-                                    placeholder="About your work"
+                                    name='LookingForAJobDescription'
+                                    placeholder='About your work'
                                 />
                             </div>
                         </div>
@@ -204,37 +202,37 @@ const ProfileHeadForm = (props) => {
                             contacts={contacts}
                         />
 
-                        <div class="profile-head-form__item prof-form-item">
-                            <b class="prof-form-item__title">My Website:</b>
-                            <div class="prof-form-item__field">
+                        <div class='profile-head-form__item prof-form-item'>
+                            <b class='prof-form-item__title'>My Website:</b>
+                            <div class='prof-form-item__field'>
                                 <MyTextarea
                                     value={values.website}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    name="website"
-                                    placeholder="My Website"
+                                    name='website'
+                                    placeholder='My Website'
                                     isInput={true}
                                 />
                             </div>
                         </div>
 
-                        <div class="profile-head-form__item prof-form-item">
-                            <b class="prof-form-item__title">Main link:</b>
-                            <div class="prof-form-item__field">
+                        <div class='profile-head-form__item prof-form-item'>
+                            <b class='prof-form-item__title'>Main link:</b>
+                            <div class='prof-form-item__field'>
                                 <MyTextarea
                                     value={values.mainLink}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    name="mainLink"
-                                    placeholder="Main link"
+                                    name='mainLink'
+                                    placeholder='Main link'
                                     isInput={true}
                                 />
                             </div>
                         </div>
                         <button
                             disabled={!isValid}
-                            type="submit"
-                            class="profile-head-form__submit prof-head__edit-btn"
+                            type='submit'
+                            class='profile-head-form__submit prof-head__edit-btn'
                         >
                             Save
                         </button>

@@ -13,7 +13,7 @@ const defaultState = {
     pageSize: 6,
     currentPage: 1,
     totalUsersCount: 0,
-    isFetchingData: false,
+    isFetchingData: true,
     followingInProgressState: [],
 }
 
@@ -47,14 +47,18 @@ const UsersPageReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 users: state.users.map((user) =>
-                    action.userId === user.id ? { ...user, followed: true } : user
+                    action.userId === user.id
+                        ? { ...user, followed: true }
+                        : user
                 ),
             }
         case UNFOLLOW:
             return {
                 ...state,
                 users: state.users.map((user) =>
-                    action.userId === user.id ? { ...user, followed: false } : user
+                    action.userId === user.id
+                        ? { ...user, followed: false }
+                        : user
                 ),
             }
         case SET_USERS:
@@ -101,14 +105,18 @@ export const setUsers = (users) => ({
     users: users,
 })
 
-export const getUsersThuckCreator = (currentPage, pageSize) => (dispatch) => {
-    dispatch(fetching())
+export const getUsersThuckCreator =
+    (currentPage, pageSize) => async (dispatch) => {
+        dispatch(fetching())
 
-    usersAPI.requestUsersData(currentPage, pageSize).then((data) => {
-        dispatch(endFetching())
-        dispatch(
+        const requestData = await usersAPI.requestUsersData(
+            currentPage,
+            pageSize
+        )
+
+        await dispatch(
             setUsers(
-                data.items.map((user) => {
+                requestData.items.map((user) => {
                     return {
                         id: user.id,
                         fullname: user.name,
@@ -123,8 +131,9 @@ export const getUsersThuckCreator = (currentPage, pageSize) => (dispatch) => {
                 })
             )
         )
-    })
-}
+
+        dispatch(endFetching())
+    }
 
 const followOrUnfollowFlow = async (userId, method, dispatch) => {
     dispatch(followingInProgress(true, userId))
@@ -139,9 +148,7 @@ const followOrUnfollowFlow = async (userId, method, dispatch) => {
         }
 
         dispatch(followingInProgress(false, userId))
-    } catch (error) {
-        console.log("error", error.message)
-    }
+    } catch (error) {}
 }
 
 export const followThunkCreator = (userId) => (dispatch) => {

@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
     headers: {
-        "API-KEY": "d184a441-2b4e-4887-89a3-478bc0bebff2",
+        "API-KEY": "cebb09d0-fe2a-4f47-8835-31a231006854",
     },
 })
 
@@ -43,7 +43,10 @@ export const authAPI = {
                     if (response.data.resultCode === 0) {
                         resolve(response.data.data)
                     } else {
-                        reject([response.data.resultCode, response.data.messages[0]])
+                        reject([
+                            response.data.resultCode,
+                            response.data.messages[0],
+                        ])
                     }
                 })
                 .catch((reason) => reject(reason))
@@ -72,18 +75,20 @@ export const profileAPI = {
         formData.append("image", photo)
 
         try {
-            const response = await axiosInstance.put(`profile/photo`, formData, {
-                "Content-Type": "multipart/form-data",
-            })
+            const response = await axiosInstance.put(
+                `profile/photo`,
+                formData,
+                {
+                    "Content-Type": "multipart/form-data",
+                }
+            )
 
             if (response.data.resultCode === 0) {
                 return response.data.data.photos
             } else {
                 throw new Error(response.data.resultCode)
             }
-        } catch (error) {
-            console.log("upload avatar error", error)
-        }
+        } catch (error) {}
     },
 
     requestProfileData: async (userId) => {
@@ -92,7 +97,9 @@ export const profileAPI = {
     },
 
     requestProfileStatus: async (userId) => {
-        const response = await axiosInstance.get(`profile/status/${userId || 2}`)
+        const response = await axiosInstance.get(
+            `profile/status/${userId || 2}`
+        )
         return response.data
     },
 

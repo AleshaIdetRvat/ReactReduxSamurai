@@ -5,37 +5,36 @@ import { compose } from "redux"
 import "./Sidebar.scss"
 
 const Sidebar = (props) => {
-    console.log(props)
     return (
-        <nav class="sidebar">
-            <div class="sidebar__body">
-                <ul class="sidebar__grid">
+        <nav class='sidebar'>
+            <div class='sidebar__body'>
+                <ul class='sidebar__grid'>
                     <NavLink
-                        activeClassName="selected"
+                        activeClassName='selected'
                         to={`/profile/${props.UserId}`}
-                        className="sidebar__item"
+                        className='sidebar__item'
                     >
                         <span>Profile</span>
                     </NavLink>
                     <NavLink
-                        activeClassName="selected"
-                        to="/dialogs"
-                        className="sidebar__item"
+                        activeClassName='selected'
+                        to='/dialogs'
+                        className='sidebar__item'
                     >
                         <span>Messages</span>
                     </NavLink>
                     <NavLink
-                        activeClassName="selected"
-                        to="/users"
-                        className="sidebar__item"
+                        activeClassName='selected'
+                        to='/users'
+                        className='sidebar__item'
                     >
                         <span>Find Users</span>
                     </NavLink>
 
                     <NavLink
-                        activeClassName="selected"
-                        to="/news"
-                        className="sidebar__item"
+                        activeClassName='selected'
+                        to='/news'
+                        className='sidebar__item'
                     >
                         <span>News</span>
                     </NavLink>

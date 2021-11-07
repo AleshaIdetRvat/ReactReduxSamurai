@@ -89,7 +89,6 @@ export const logoutThunkCreator = () => (dispatch) => {
     authAPI
         .logout()
         .then((data) => {
-            console.log("logout_ThunkCreator", data)
             dispatch(setAuthUserData(null, null, null, false))
         })
         .catch((reason) => {

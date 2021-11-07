@@ -37,7 +37,7 @@ export const ProfileStatus = (props) => {
     }
 
     return (
-        <div onDoubleClick={toggleStatusEditMode} class="prof-head__about">
+        <div onDoubleClick={toggleStatusEditMode} class='prof-head__about'>
             <b>Status: </b>
 
             <>
@@ -49,17 +49,17 @@ export const ProfileStatus = (props) => {
                         }}
                         onBlur={(e) => {
                             toggleStatusEditMode()
-                            console.log(e.currentTarget.value)
+
                             if (e.currentTarget.value !== props.status) {
                                 updateUserStatus(status)
                             }
                         }}
                         value={status}
                         onChange={inputChangedHandler}
-                        className="prof-head__about-input"
+                        className='prof-head__about-input'
                     />
                 ) : (
-                    <span class="prof-head__about-text">{status}</span>
+                    <span class='prof-head__about-text'>{status}</span>
                 )}
             </>
         </div>
@@ -71,8 +71,8 @@ export const Contact = ({ icon, link, name, forForm, children, className }) => {
         <div class={className}>
             {!forForm ? (
                 <a
-                    target="_blank"
-                    rel="noreferrer noopener"
+                    target='_blank'
+                    rel='noreferrer noopener'
                     href={
                         link?.substr(0, 4) == "http" ? link : "http://" + link
                     }
@@ -136,8 +136,6 @@ const ProfileContacts = ({ contacts, forForm = false }) => {
 }
 
 const ProfileHeadInfo = (props) => {
-    /** */
-    console.log("ProfileHeadInfo", props)
     const {
         aboutMe,
         contacts,
@@ -155,13 +153,13 @@ const ProfileHeadInfo = (props) => {
     } = props
 
     return (
-        <div class="prof-head__info">
-            <div class="prof-head__fullname">
+        <div class='prof-head__info'>
+            <div class='prof-head__fullname'>
                 <b>{fullName}</b>
                 {isMyProfile && (
                     <button
                         onClick={() => props.setEditMode(true)}
-                        class="prof-head__edit-btn"
+                        class='prof-head__edit-btn'
                     >
                         Edit profile
                     </button>
@@ -177,21 +175,21 @@ const ProfileHeadInfo = (props) => {
                 about me: <i>{aboutMe}</i>
             </div>
 
-            <div class="prof-head__look-job">
+            <div class='prof-head__look-job'>
                 <b>Занятость: </b>
                 {lookingForAJob ? "Открыт для ваших предложений" : "Работаю"}
-                <div class="prof-head__look-job-desc">
+                <div class='prof-head__look-job-desc'>
                     <b>Description: </b>
                     {lookingForAJobDescription}
                 </div>
             </div>
             <ProfileContacts contacts={contacts} />
 
-            <div class="prof-head__my-site">
+            <div class='prof-head__my-site'>
                 {contacts?.website && (
                     <a
-                        class="prof-head__contact"
-                        target="_blank"
+                        class='prof-head__contact'
+                        target='_blank'
                         href={`${contacts.website}`}
                     >
                         My Website
@@ -200,8 +198,8 @@ const ProfileHeadInfo = (props) => {
                 <div>------------</div>
                 {contacts?.mainLink && (
                     <a
-                        class="prof-head__contact"
-                        target="_blank"
+                        class='prof-head__contact'
+                        target='_blank'
                         href={`${contacts.mainLink}`}
                     >
                         Main link
@@ -218,14 +216,13 @@ const ProfileHeadInfoEdit = (props) => {
     }
 
     return (
-        <div class="prof-head__info prof-head-info-form">
+        <div class='prof-head__info prof-head-info-form'>
             <ProfileHeadForm onSave={onSave} {...props} />
         </div>
     )
 }
 
 const ProfHeadFuncComponent = (props) => {
-    console.log("_______PROFILE HEAD", props)
     const { photos, isMyProfile, updateAvatar } = props
 
     const [editMode, setEditMode] = React.useState(false)
@@ -237,18 +234,18 @@ const ProfHeadFuncComponent = (props) => {
     }
 
     return (
-        <div class="prof-head">
-            <div class="prof-head__body">
-                <div class="prof-head__image">
+        <div class='prof-head'>
+            <div class='prof-head__body'>
+                <div class='prof-head__image'>
                     {photos ? <img src={photos.large} /> : ""}
                     {isMyProfile && (
                         <>
-                            <label class="prof-head__file-upload">
+                            <label class='prof-head__file-upload'>
                                 <input
                                     onChange={onAvatarSelected}
-                                    type="file"
+                                    type='file'
                                 />
-                                <img src={uploadIcon} alt="upload" />
+                                <img src={uploadIcon} alt='upload' />
                             </label>
                         </>
                     )}

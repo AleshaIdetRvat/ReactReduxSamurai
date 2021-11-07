@@ -11,17 +11,17 @@ const maxLenght20 = maxLenghtCreator(20) //оалдыва ПРолиофыдлв
 
 const NewMsgForm = ({ onSubmit, handleSubmit }) => {
     return (
-        <form onSubmit={handleSubmit} class="send__grid">
+        <form onSubmit={handleSubmit} class='send__grid'>
             <Field
                 isInput={true}
                 component={MyTextarea}
                 validate={[required, maxLenght20]}
-                name="message"
-                type="text"
-                placeholder="Your message"
-                class="send__input"
+                name='message'
+                type='text'
+                placeholder='Your message'
+                class='send__input'
             />
-            <button class="send__btn">Send</button>
+            <button class='send__btn'>Send</button>
         </form>
     )
 }
@@ -30,7 +30,6 @@ const NewMsgReduxForm = reduxForm({ form: "newMsg" })(NewMsgForm)
 
 const Dialogs = ({ dialogsData, addMsg }) => {
     const onSubmitMsg = (newMsgFormData) => {
-        console.log(newMsgFormData.message)
         addMsg(newMsgFormData.message)
     }
 
@@ -43,24 +42,24 @@ const Dialogs = ({ dialogsData, addMsg }) => {
     ))
 
     return (
-        <div class="dialogs">
-            <div class="dialogs__body">
-                <div class="dialogs__grid">
-                    <div class="dialogs__sidebar dial-sidebar">
-                        <div class="dial-sidebar__grid">{usersElements}</div>
+        <div class='dialogs'>
+            <div class='dialogs__body'>
+                <div class='dialogs__grid'>
+                    <div class='dialogs__sidebar dial-sidebar'>
+                        <div class='dial-sidebar__grid'>{usersElements}</div>
                     </div>
 
-                    <div class="dialogs__chat chat">
-                        <div class="chat__body">
-                            <div class="chat__messageS messageS">
-                                <div class="messageS__grid">
+                    <div class='dialogs__chat chat'>
+                        <div class='chat__body'>
+                            <div class='chat__messageS messageS'>
+                                <div class='messageS__grid'>
                                     {usersMsgElements}
                                     {usersMsgElements}
                                     {usersMsgElements}
                                 </div>
                             </div>
 
-                            <div class="chat__send send">
+                            <div class='chat__send send'>
                                 <NewMsgReduxForm onSubmit={onSubmitMsg} />
                             </div>
                         </div>

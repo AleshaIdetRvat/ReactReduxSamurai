@@ -7,18 +7,10 @@
     left: 0;
     right: 0;
     height: 100%;
+    max-height: 100vh;
     background-color: rgba(255, 255, 255, 1);
-    transition: 0.3s;
-    opacity: 0.8;
-    animation: starting-anim 1s;
-
-    &.--closing {
-        animation: closing-anim ease 2s forwards;
-
-        &__spin-box {
-            animation: rotate-animation ease infinite 1s, closing-anim ease 1s forwards;
-        }
-    }
+    transition: 0.4s;
+    // animation: showing-anim linear 0.6s forwards;
 
     &__wall {
         position: absolute;
@@ -43,22 +35,19 @@
         border-right: 10px solid transparent;
         border-radius: 50%;
 
-        animation: rotate-animation ease infinite 1s, starting-anim linear 1s forwards;
+        animation: rotate-animation linear infinite 1s;
     }
 }
 
-@keyframes closing-anim {
-    75% {
-        opacity: 1;
-    }
+// .preloader--closing {
+//     animation: showing-anim linear 0.6s forwards;
 
-    100% {
-        //z-index: -1;
-        opacity: 0;
-    }
-}
+//     &__spin-box {
+//         animation: rotate-animation linear infinite 1s;
+//     }
+// }
 
-@keyframes starting-anim {
+@keyframes showing-anim {
     0% {
         opacity: 0;
     }
@@ -81,4 +70,16 @@
         opacity: 0.8;
         transform: rotate(360deg) scale(50%);
     }
+}
+
+.preloader-enter-active {
+    animation: showing-anim 0.5s forwards;
+}
+
+.preloader-enter-done {
+    // background-color: tomato;
+}
+
+.preloader-exit-active {
+    animation: showing-anim 0.5s reverse;
 }

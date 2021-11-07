@@ -116,9 +116,7 @@ export const getUserStatus = (userId) => async (dispatch) => {
         const status = await getStatus(userId)
         dispatch(setStatus(status))
         dispatch(toggleSetFetching(false))
-    } catch (error) {
-        console.log("error", error.message)
-    }
+    } catch (error) {}
 }
 
 export const updateAvatarTC = (photo) => async (dispatch) => {
@@ -129,7 +127,6 @@ export const updateAvatarTC = (photo) => async (dispatch) => {
         await dispatch(setAvatar(photos))
         dispatch(toggleSetFetching(false))
     } catch (error) {
-        console.log("error", error.message)
     } finally {
     }
 }
@@ -142,7 +139,6 @@ export const updateProfInfo = (profInfo, userId) => async (dispatch) => {
         await profileAPI.updateProfInfo({ ...profInfo, userId })
         await dispatch(setUserProfile(profInfo))
     } catch (error) {
-        console.log("error: ", error.message)
         throw new Error()
     } finally {
         dispatch(toggleSetFetching(false))
@@ -156,9 +152,7 @@ export const updateUserStatus = (status) => async (dispatch) => {
         await profileAPI.updateProfileStatus(status)
         dispatch(setStatus(status))
         dispatch(toggleSetFetching(false))
-    } catch (error) {
-        console.log("error", error.message)
-    }
+    } catch (error) {}
 }
 
 //////////////////////////////////////////////////////////
@@ -172,9 +166,7 @@ export const getUserPersonDataThunkCreator = (userId) => async (dispatch) => {
         const profileData = await profileAPI.requestProfileData(userId)
         dispatch(setUserProfile(profileData))
         dispatch(toggleSetFetching(false))
-    } catch (error) {
-        console.log("error", error.message)
-    }
+    } catch (error) {}
 }
 
 export const initializeProfile = () => async (dispatch) => {

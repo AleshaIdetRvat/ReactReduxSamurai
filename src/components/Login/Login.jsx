@@ -1,18 +1,22 @@
 import React from "react"
 import MyTextarea from "../common/FormsControl/MyTextarea"
 import Checkbox from "../common/FormsControl/FormikCheckbox"
-import { loginThunkCreator, logoutThunkCreator } from "../../redux/reducers/AuthReducer"
+import {
+    loginThunkCreator,
+    logoutThunkCreator,
+} from "../../redux/reducers/AuthReducer"
 import { connect } from "react-redux"
 import { Formik } from "formik"
 import * as yup from "yup"
 import "./Login.scss"
+import Preloader from "../common/Preloader/Preloader"
 
 const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
     const validationSchema = yup.object().shape({
         login: yup
             .string()
             .email("Invalid email")
-            .max(20, "Too Long!")
+            .max(30, "Too Long!")
             .required("Is required!"),
         password: yup
             .string()
@@ -31,10 +35,7 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
                 captcha: "",
             }}
             validateOnBlur
-            onSubmit={(values) => {
-                console.log("onSubmit", values)
-                onSubmitLogin(values)
-            }}
+            onSubmit={(values) => onSubmitLogin(values)}
             validationSchema={validationSchema}
         >
             {({
@@ -48,56 +49,56 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
                 dirty,
             }) => {
                 return (
-                    <form onSubmit={handleSubmit} class="login__form">
-                        <div class="login__input-login">
+                    <form onSubmit={handleSubmit} class='login__form'>
+                        <div class='login__input-login'>
                             <MyTextarea
                                 value={values.login}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={errors.login}
                                 touched={touched.login}
-                                name="login"
-                                type="text"
-                                placeholder="login"
+                                name='login'
+                                type='text'
+                                placeholder='login'
                                 isHorizontal={true}
                                 isInput={true}
                             />
                         </div>
-                        <div class="login__input-password">
+                        <div class='login__input-password'>
                             <MyTextarea
                                 value={values.password}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={errors.password}
                                 touched={touched.password}
-                                name="password"
-                                type="password"
-                                placeholder="password"
+                                name='password'
+                                type='password'
+                                placeholder='password'
                                 isHorizontal={true}
                                 isInput={true}
                             />
                         </div>
-                        <div class="login__remember-me">
-                            <Checkbox name="rememberMe" />
+                        <div class='login__remember-me'>
+                            <Checkbox name='rememberMe' />
                             remember me
                         </div>
 
                         {captchaUrl && (
                             <>
-                                <div class="login__captcha">
+                                <div class='login__captcha'>
                                     <img
-                                        class="login__captcha-img"
+                                        class='login__captcha-img'
                                         src={captchaUrl}
-                                        alt="captcha"
+                                        alt='captcha'
                                     />
                                 </div>
-                                <div class="login__input-password input-captcha">
+                                <div class='login__input-password input-captcha'>
                                     <MyTextarea
                                         onBlur={handleBlur}
                                         value={values.captcha}
                                         onChange={handleChange}
-                                        name="captcha"
-                                        placeholder="captcha"
+                                        name='captcha'
+                                        placeholder='captcha'
                                         isHorizontal={true}
                                         isInput={true}
                                     />
@@ -107,8 +108,8 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
 
                         <button
                             disabled={!isValid || !dirty}
-                            type="submit"
-                            class="login-btn"
+                            type='submit'
+                            class='login-btn'
                         >
                             Sign-in
                         </button>
@@ -120,34 +121,29 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
 }
 
 const Login = (props) => {
-    const { captcha, isAuth, authError, loginThunkCreator, logoutThunkCreator } = props
+    const {
+        captcha,
+        isAuth,
+        authError,
+        loginThunkCreator,
+        logoutThunkCreator,
+    } = props
 
     const onSubmitLogin = (values) => {
         const { login, password, remeberMe, captcha } = values
         loginThunkCreator(login, password, remeberMe, captcha)
     }
+
     return (
-        <>
-            {!isAuth ? (
-                <>
-                    <div class="login">
-                        <h1 class="login__title">Login</h1>
-                        <LoginForm captchaUrl={captcha} onSubmitLogin={onSubmitLogin} />
-                        <div className="login__error-label">{authError}</div>
-                        <div className="login__balls login-balls">
-                            <div className="login-balls__ball1" />
-                            <div className="login-balls__ball2" />
-                        </div>
-                    </div>
-                </>
-            ) : (
-                <div class="logout">
-                    <button class="login-btn" onClick={logoutThunkCreator}>
-                        Logout
-                    </button>
-                </div>
-            )}
-        </>
+        <div class='login'>
+            <h1 class='login__title'>Login</h1>
+            <LoginForm captchaUrl={captcha} onSubmitLogin={onSubmitLogin} />
+            <div className='login__error-label'>{authError}</div>
+            <div className='login__balls login-balls'>
+                <div className='login-balls__ball1' />
+                <div className='login-balls__ball2' />
+            </div>
+        </div>
     )
 }
 
