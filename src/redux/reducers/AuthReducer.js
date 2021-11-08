@@ -90,19 +90,20 @@ export const loginThunkCreator =
     }
 
 export const logoutThunkCreator = () => (dispatch) => {
-    dispatch(setFetching(true))
-    authAPI
-        .logout()
-        .then((data) => {
-            dispatch(setAuthUserData(null, null, null, false))
-            window.history.pushState("", "", "#/login")
-        })
-        .catch((reason) => {
-            console.error(reason)
-        })
-        .finally(() => {
-            dispatch(setFetching(false))
-        })
+    dispatch(setAuthUserData(null, null, null, false))
+    // dispatch(setFetching(true))
+    // authAPI
+    //     .logout()
+    //     .then((data) => {
+    //         dispatch(setAuthUserData(null, null, null, false))
+    //         window.history.pushState("", "", "#/login")
+    //     })
+    //     .catch((reason) => {
+    //         console.error(reason)
+    //     })
+    //     .finally(() => {
+    //         dispatch(setFetching(false))
+    //     })
 }
 
 export default AuthReducer
