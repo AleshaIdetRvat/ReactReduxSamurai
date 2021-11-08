@@ -5,9 +5,9 @@ const SET_ERROR = "authreducer/SET_ERROR"
 const SET_FETCHING = "authreducer/SET_FETCHING"
 
 const defaultState = {
-    userId: null,
-    email: null,
-    login: null,
+    userId: 20652,
+    email: "TestUser@mail.com",
+    login: "TestUser",
     isAuth: false,
     captcha: null,
     authError: null,
@@ -49,15 +49,21 @@ export const getCaptcha = () => async (dispatch) => {
     dispatch(setCaptcha(url))
 }
 
-export const setAuthUserData = (userId, email, login, isAuth = true) => ({
+export const setAuthUserData = (
+    userId = 20652,
+    email = "TestUser@mail.com",
+    login = "TestUser",
+    isAuth = true
+) => ({
     type: SET_USER_DATA,
     data: { userId, email, login, isAuth },
 })
 
 export const getMyDataThunkCreator = () => async (dispatch) => {
     try {
-        const myData = await authAPI.requstMyData()
-        dispatch(setAuthUserData(myData.id, myData.email, myData.login))
+        //const myData = await authAPI.requstMyData()
+        dispatch(setAuthUserData())
+        // dispatch(setAuthUserData(myData.id, myData.email, myData.login))
     } catch (error) {
         dispatch(setError(error.message))
     }
@@ -70,8 +76,7 @@ export const loginThunkCreator =
         dispatch(setError(null))
 
         try {
-            await authAPI.login(email, password, rememberMe, captcha)
-
+            // await authAPI.login(email, password, rememberMe, captcha)
             dispatch(getMyDataThunkCreator())
         } catch (error) {
             const [resCode, errorMsg] = error

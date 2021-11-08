@@ -9,7 +9,6 @@ import { connect } from "react-redux"
 import { Formik } from "formik"
 import * as yup from "yup"
 import "./Login.scss"
-import Preloader from "../common/Preloader/Preloader"
 
 const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
     const validationSchema = yup.object().shape({
@@ -82,7 +81,6 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
                             <Checkbox name='rememberMe' />
                             remember me
                         </div>
-
                         {captchaUrl && (
                             <>
                                 <div class='login__captcha'>
@@ -105,7 +103,6 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
                                 </div>
                             </>
                         )}
-
                         <button
                             disabled={!isValid || !dirty}
                             type='submit'
@@ -113,6 +110,10 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
                         >
                             Sign-in
                         </button>
+                        <hr />
+                        login for test:{" "}
+                        <strong>alexey.frontend.dev@gmail.com</strong>
+                        password for test: <strong>testpassword</strong>
                     </form>
                 )
             }}
@@ -121,13 +122,7 @@ const LoginForm = ({ onSubmitLogin, captchaUrl }) => {
 }
 
 const Login = (props) => {
-    const {
-        captcha,
-        isAuth,
-        authError,
-        loginThunkCreator,
-        logoutThunkCreator,
-    } = props
+    const { captcha, authError, loginThunkCreator } = props
 
     const onSubmitLogin = (values) => {
         const { login, password, remeberMe, captcha } = values

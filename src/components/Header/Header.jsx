@@ -7,7 +7,10 @@ import "./Header.scss"
 const Header = ({ isAuth, login, className, logoutThunkCreator }) => {
     const dispatch = useDispatch()
     const onClick = () => dispatch(toggleOpenMenu())
-    const isMenuOpen = useSelector((state) => state.Sidebar.isOpen)
+    const [isMenuOpen, userId] = useSelector((state) => [
+        state.Sidebar.isOpen,
+        state.Auth.userId,
+    ])
 
     return (
         <header className={`header ${className}`}>
@@ -22,7 +25,9 @@ const Header = ({ isAuth, login, className, logoutThunkCreator }) => {
 
                     <div className='header__login header-login'>
                         <div className='header-login__body'>
-                            <NavLink to='/login'>{isAuth ? login : ""}</NavLink>
+                            <NavLink to={`/profile/${userId}`}>
+                                {isAuth ? login : ""}
+                            </NavLink>
                         </div>
                     </div>
                     {isAuth && (
