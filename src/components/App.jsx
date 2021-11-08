@@ -29,40 +29,31 @@ const App = (props) => {
                 />
                 {isAuth && <Sidebar />}
                 <div class='app__content'>
-                    <Switch>
-                        {isAuth ? (
-                            <>
-                                <Route
-                                    path='/profile/:userId?'
-                                    render={() => <ProfileContainer />}
-                                />
-
-                                <Route
-                                    path='/dialogs'
-                                    exact
-                                    render={() => <DialogsContainer />}
-                                />
-
-                                <Route
-                                    path='/users'
-                                    exact
-                                    render={() => <UsersPageContainer />}
-                                />
-
-                                <Route
-                                    path='/news'
-                                    exact
-                                    render={() => <News />}
-                                />
-                                <Redirect to='/news' />
-                            </>
-                        ) : (
-                            <>
-                                <Route path='/login' render={() => <Login />} />
-                                <Redirect to='/login' />
-                            </>
-                        )}
-                    </Switch>
+                    {isAuth ? (
+                        <Switch>
+                            <Route
+                                path='/profile/:userId?'
+                                render={() => <ProfileContainer />}
+                            />
+                            <Route
+                                path='/dialogs'
+                                exact
+                                render={() => <DialogsContainer />}
+                            />
+                            <Route
+                                path='/users'
+                                exact
+                                render={() => <UsersPageContainer />}
+                            />
+                            <Route path='/news' exact render={() => <News />} />
+                            <Redirect to='/news' />
+                        </Switch>
+                    ) : (
+                        <Switch>
+                            <Route path='/login' render={() => <Login />} />
+                            <Redirect to='/login' />
+                        </Switch>
+                    )}
                 </div>
             </div>
         </HashRouter>

@@ -195,7 +195,7 @@ const ProfileHeadInfo = (props) => {
                         My Website
                     </a>
                 )}
-                <div>------------</div>
+                <hr />
                 {contacts?.mainLink && (
                     <a
                         class='prof-head__contact'

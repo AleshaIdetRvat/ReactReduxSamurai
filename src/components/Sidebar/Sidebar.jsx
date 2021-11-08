@@ -1,12 +1,14 @@
 import React from "react"
+import { useSelector } from "react-redux"
 import { connect } from "react-redux"
-import { NavLink, withRouter } from "react-router-dom"
-import { compose } from "redux"
+import { NavLink } from "react-router-dom"
 import "./Sidebar.scss"
 
 const Sidebar = (props) => {
+    const isMenuOpen = useSelector((state) => state.Sidebar.isOpen)
+
     return (
-        <nav class='sidebar'>
+        <nav class={`sidebar ${isMenuOpen ? "menu--open" : ""}`}>
             <div class='sidebar__body'>
                 <ul class='sidebar__grid'>
                     <NavLink

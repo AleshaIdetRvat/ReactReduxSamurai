@@ -1,5 +1,5 @@
 import { newsAPI } from "../../components/api/newsApi"
-export const SET_NEWS = "ADD-MESSAGE"
+export const SET_NEWS = "SET_NEWS"
 
 const defaultState = {
     news: [],
@@ -21,19 +21,21 @@ const setNews = (payload) => ({ type: SET_NEWS, payload })
 
 export const getNews = () => async (dispatch) => {
     const news = await newsAPI.getNews()
-    const newsWithPrettyDate = news.map((post) => ({
-        ...post,
-        publishedAt: new Date(post.publishedAt)
-            .toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-            })
-            .split(" ")
-            .join("-"),
-    }))
+    if (news && news.length !== 0) {
+        const newsWithPrettyDate = news.map((post) => ({
+            ...post,
+            publishedAt: new Date(post.publishedAt)
+                .toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                })
+                .split(" ")
+                .join("-"),
+        }))
 
-    dispatch(setNews(newsWithPrettyDate))
+        dispatch(setNews(newsWithPrettyDate))
+    }
 }
 
 export default NewsReducer

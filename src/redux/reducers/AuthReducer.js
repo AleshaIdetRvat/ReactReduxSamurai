@@ -90,6 +90,7 @@ export const logoutThunkCreator = () => (dispatch) => {
         .logout()
         .then((data) => {
             dispatch(setAuthUserData(null, null, null, false))
+            window.history.pushState("", "", "#/login")
         })
         .catch((reason) => {
             console.error(reason)

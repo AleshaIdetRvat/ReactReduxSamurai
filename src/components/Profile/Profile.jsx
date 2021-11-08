@@ -1,7 +1,6 @@
 import React from "react"
-import "./Profile.scss"
-import MyPostsContainer from "./MyPosts/MyPostsContainer"
 import ProfHeadFuncComponent from "./ProfHead/ProfHeadFuncComponent"
+import "./Profile.scss"
 
 const Profile = (props) => (
     <div class='profile'>

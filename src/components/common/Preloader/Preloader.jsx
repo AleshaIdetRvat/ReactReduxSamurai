@@ -1,9 +1,9 @@
 import React from "react"
 import { CSSTransition } from "react-transition-group"
 import "./Preloader.scss"
-// import { usePrevious } from "../../../hooks/previous.hook"
 
 const Preloader = ({ loading }) => {
+    console.log("loading: ", loading)
     return (
         <CSSTransition
             in={loading}
@@ -20,4 +20,4 @@ const Preloader = ({ loading }) => {
         </CSSTransition>
     )
 }
-export default Preloader
+export default React.memo(Preloader)

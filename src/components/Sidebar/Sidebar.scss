@@ -5,11 +5,27 @@
     &__body {
         height: 100%;
 
-        background-color: rgba(189, 205, 235, 0.815);
+        background-color: rgba(189, 205, 235, 1);
     }
 
     &__grid {
         display: grid;
+    }
+
+    @media (max-width: 768px) {
+        transform: translate(-100%);
+
+        position: absolute;
+        z-index: 100;
+        top: 80px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 121px;
+    }
+
+    &.menu--open {
+        transform: translate(0%);
     }
 
     &__item {

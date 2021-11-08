@@ -1,3 +1,91 @@
+.login-btn__menu-burger {
+    background-color: transparent;
+
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+
+    @media (min-width: 769px) {
+        display: none;
+    }
+}
+.menu-burger {
+    &.menu-burger--open {
+        .menu-burger__body {
+            transform: translate(4px, -2px);
+        }
+
+        .menu-burger__middle-stick {
+            background-color: #c4e3ff00;
+            height: 4px;
+            border-radius: 5px;
+            width: 100%;
+
+            &::after,
+            &::before {
+                content: "";
+                display: block;
+                background-color: #c4e3ff;
+                height: 4px;
+                border-radius: 5px;
+
+                position: absolute;
+                left: 0;
+                right: 0;
+            }
+
+            &::before {
+                top: 0;
+                transform: rotate(45deg);
+            }
+
+            &::after {
+                bottom: 0;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+}
+.menu-burger__body {
+    transition: 0.3s;
+    position: relative;
+    width: 30px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+.menu-burger__middle-stick {
+    transition: 0.3s;
+    background-color: #c4e3ff;
+    height: 4px;
+    border-radius: 5px;
+    width: 100%;
+
+    &::after,
+    &::before {
+        transition: 0.3s;
+        content: "";
+        display: block;
+        background-color: #c4e3ff;
+        height: 4px;
+        border-radius: 5px;
+
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    &::before {
+        transform-origin: left;
+        top: 0;
+    }
+
+    &::after {
+        transform-origin: 6px 4px;
+        bottom: 0;
+    }
+}
+
 .header {
     position: relative;
     z-index: 15;

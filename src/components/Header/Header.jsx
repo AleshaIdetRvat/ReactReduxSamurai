@@ -1,8 +1,14 @@
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
+import { toggleOpenMenu } from "../../redux/reducers/SidebarReducer"
 import "./Header.scss"
 
 const Header = ({ isAuth, login, className, logoutThunkCreator }) => {
+    const dispatch = useDispatch()
+    const onClick = () => dispatch(toggleOpenMenu())
+    const isMenuOpen = useSelector((state) => state.Sidebar.isOpen)
+
     return (
         <header className={`header ${className}`}>
             <div className='header__body'>
@@ -29,6 +35,16 @@ const Header = ({ isAuth, login, className, logoutThunkCreator }) => {
                             </button>
                         </div>
                     )}
+                    <button
+                        onClick={onClick}
+                        className={`login-btn__menu-burger menu-burger ${
+                            isMenuOpen ? "menu-burger--open" : ""
+                        }`}
+                    >
+                        <div className={`menu-burger__body `}>
+                            <div className='menu-burger__middle-stick'></div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </header>
